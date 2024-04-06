@@ -18,3 +18,5 @@ pixel_size = 0.05
 texture = ExtResource( 2 )
 
 [node name="RayCast" type="RayCast" parent="."]
+
+[node name="ObliterationTimer" type="Timer" parent="."]

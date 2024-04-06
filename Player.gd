@@ -8,9 +8,11 @@ onready var anim_player = $AnimationPlayer
 onready var raycast = $RayCast
 
 func _ready():
+	Global.player_node = self
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	yield(get_tree(), "idle_frame")
 	get_tree().call_group("zombies", "set_player", self)
+	
 
 func _input(event):
 	if event is InputEventMouseMotion:
