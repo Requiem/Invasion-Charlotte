@@ -11,6 +11,7 @@ var dead = false
 func _ready():
 	anim_player.play("walk")
 	add_to_group("zombies")
+	
 
 func _physics_process(delta):
 	if dead:
@@ -27,9 +28,10 @@ func _physics_process(delta):
 	if raycast.is_colliding():
 		var coll = raycast.get_collider()
 		if coll != null and coll.name == "Player":
-			coll.kill()
+			pass
+			#coll.die()
 
-func kill():
+func die():
 	dead = true
 	$CollisionShape.disabled = true
 	anim_player.play("die")
