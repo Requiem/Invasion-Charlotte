@@ -31,10 +31,15 @@ func _physics_process(delta):
 			pass
 			#coll.die()
 
+func _fade_away():
+	queue_free()
+
 func die():
 	dead = true
 	$CollisionShape.disabled = true
 	anim_player.play("die")
+	$ObliterationTimer.connect("timeout", self, "_fade_away")
+	$ObliterationTimer.start()
 
 func set_player(p):
 	player = p
