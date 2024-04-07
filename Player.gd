@@ -16,8 +16,16 @@ func _ready():
 
 func _input(event):
 	if event is InputEventMouseMotion:
+		print(rotation_degrees)
 		rotation_degrees.y -= MOUSE_SENS * event.relative.x
 		rotation_degrees.x -= MOUSE_SENS * event.relative.y
+		
+		# clip the vertical axis viewing so camera can't flip around vertically
+		if rotation_degrees.x > 89:
+			rotation_degrees.x = 89
+		if rotation_degrees.x < -89:
+			rotation_degrees.x = -89
+
 
 func _process(delta):
 	if Input.is_action_pressed("exit"):
