@@ -14,15 +14,6 @@ collision_mask = 7
 [node name="Goblin" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 1, 5 )
 
-[node name="Goblin2" parent="." instance=ExtResource( 4 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 1, -8 )
-
-[node name="Goblin3" parent="." instance=ExtResource( 4 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -23, 1, 4 )
-
-[node name="Goblin4" parent="." instance=ExtResource( 4 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 1, 0 )
-
 [node name="GridMap" type="GridMap" parent="."]
 mesh_library = ExtResource( 3 )
 collision_mask = 3

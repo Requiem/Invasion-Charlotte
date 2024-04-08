@@ -11,11 +11,13 @@ export var ACCELERATION_RATE = 0.1
 export var RATE_OF_FIRE_SECONDS_PER_SHOT = 0.3
 const HEIGHT_OF_PLAYER = Vector3(0, 1.5, 0) #TODO: is this correct?
 const STARTING_HEALTH_POINTS = 3
+const SMELLING_DISTANCE = 20
+
 const gravity = 320
 
 var player_node
 
-onready var raycast = $RayCast
+#onready var raycast = $RayCast
 #onready var anim_player = $AnimationPlayer
 
 var player = null
@@ -323,13 +325,12 @@ func _add_next_waypoint_to_nav():
 
 func _physics_process(delta):
 	var vec_to_player = player_node.translation - translation
-	vec_to_player = vec_to_player.normalized()
-	self.look_at(player_node.translation, Vector3.UP)
-	
-	if dead:
-		return
-	if player == null:
-		return
+#	vec_to_player = vec_to_player.normalized()
+#	self.look_at(player_node.translation, Vector3.UP)
+	$Sprite3D.look_at(player_node.translation, Vector3.UP)
+
+	if (player_node.translation.distance_to(translation) < SMELLING_DISTANCE):
+		self.has_just_been_alerted = true
 	
 #	var vec_to_player = player.translation - translation
 #	vec_to_player = vec_to_player.normalized()
@@ -340,12 +341,19 @@ func _physics_process(delta):
 	var move_vec = Vector3()
 	move_vec.y -= gravity * delta
 	move_vec = move_and_slide(move_vec, Vector3.UP)
-	
-	if raycast.is_colliding():
-		var coll = raycast.get_collider()
-		if coll != null and coll.name == "Player":
-			pass
-			#coll.die()
+
+	if dead:
+		return
+	if player == null:
+		return
+
+#
+#	if raycast.is_colliding():
+#		var coll = raycast.get_collider()
+#		if coll != null and coll.name == "Player":
+#			pass
+#			#coll.die()
+
 
 func _fade_away():
 	queue_free()
