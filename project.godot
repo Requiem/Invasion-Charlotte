@@ -56,6 +56,12 @@ restart={
  ]
 }
 
+[layer_names]
+
+3d_physics/layer_1="Environment"
+3d_physics/layer_2="Characters"
+3d_physics/layer_3="Interactibles"
+
 [rendering]
 
 environment/default_environment="res://default_env.tres"

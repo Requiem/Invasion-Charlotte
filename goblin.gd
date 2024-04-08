@@ -10,7 +10,7 @@ const MOVE_SPEED = 3
 export var ACCELERATION_RATE = 0.1
 export var RATE_OF_FIRE_SECONDS_PER_SHOT = 0.3
 const HEIGHT_OF_PLAYER = Vector3(0, 1.5, 0) #TODO: is this correct?
-const STARTING_HEALTH_POINTS = 100
+const STARTING_HEALTH_POINTS = 3
 const gravity = 320
 
 var player_node
@@ -25,6 +25,8 @@ var dead = false
 ###  AI code
 var navAgent : NavigationAgent
 var waypoint_index = 0
+var actual_velocity : Vector3
+
 export(NodePath) var waypoint_graph_node_path
 onready var waypoint_graph = get_node_or_null(waypoint_graph_node_path)
 
@@ -147,8 +149,9 @@ func _exit_combat():
 
 
 func stop_attacking():
-	if $AttackTimer.is_connected("timeout", self, "_fire_projectile"):
-		$AttackTimer.disconnect("timeout", self, "_fire_projectile")
+#	if $AttackTimer.is_connected("timeout", self, "_fire_projectile"):
+#		$AttackTimer.disconnect("timeout", self, "_fire_projectile")
+	pass
 
 
 func _run_state_enter_events():	
@@ -157,7 +160,7 @@ func _run_state_enter_events():
 		_alert_the_npc(player_node.global_transform.origin)
 		_enter_combat()
 	elif _current_state == STATES.DECEASED and _previous_state != STATES.DECEASED:
-		$PatrolTimer.disconnect("timeout", self, "_on_to_next_destination")
+		#$PatrolTimer.disconnect("timeout", self, "_on_to_next_destination")
 		_unregister_listener_for_player_gun_sounds()
 		#_change_mesh_color(Color(0,0,0,1))
 		#play_dying_animation()
@@ -188,6 +191,15 @@ func _enter_combat():
 	if not $TargetTrackerTimer.is_connected("timeout", self, "track_target"):
 		var _connect_result = $TargetTrackerTimer.connect("timeout", self, "track_target")
 		$TargetTrackerTimer.start()
+
+
+func _start_attacking():
+	self.has_reacted_to_attack = true
+
+
+func track_target():
+	self._enemy_position = player_node.global_translation
+	navAgent.set_target_location(self._enemy_position)
 
 
 func _alert_the_npc(position_of_interest):
@@ -224,23 +236,27 @@ func _run_state_dependent_processes():
 
 
 func _move_toward_position(target_pos):
-	var direction = global_transform.origin.direction_to(target_pos)
-	var final_velocity = direction * MOVE_SPEED
-	self.actual_velocity.x = lerp(self.actual_velocity.x, final_velocity.x, ACCELERATION_RATE)
-	self.actual_velocity.z = lerp(self.actual_velocity.z, final_velocity.z, ACCELERATION_RATE)
-	
-	self.actual_velocity *= Vector3(1, 0, 1) # vector for feet on the ground
-	self.actual_velocity.y -= 4.0
-	var _move_result = move_and_slide(self.actual_velocity, Vector3.UP)
+#	var direction = global_transform.origin.direction_to(target_pos)
+#	var final_velocity = direction * MOVE_SPEED
+#	self.actual_velocity.x = lerp(self.actual_velocity.x, final_velocity.x, ACCELERATION_RATE)
+#	self.actual_velocity.z = lerp(self.actual_velocity.z, final_velocity.z, ACCELERATION_RATE)
+#
+#	self.actual_velocity *= Vector3(1, 0, 1) # vector for feet on the ground
+#	self.actual_velocity.y -= 4.0
+#	var _move_result = move_and_slide(self.actual_velocity*10, Vector3.UP)
 	#meshAnimationTree["parameters/running/Blend2/blend_amount"] = 1.0
 	
+	var vec_to_player = player_node.translation - translation
+	vec_to_player = vec_to_player.normalized()
+	self.look_at(player_node.translation, Vector3.UP)
+	move_and_slide(vec_to_player * MOVE_SPEED)	
 
 func attack():
-	if not $AttackTimer.is_connected("timeout", self, "_fire_projectile"):
-		$AttackTimer.wait_time = RATE_OF_FIRE_SECONDS_PER_SHOT
-		var _connect_result = $AttackTimer.connect("timeout", self, "_fire_projectile")
-		$AttackTimer.start()
-
+#	if not $AttackTimer.is_connected("timeout", self, "_fire_projectile"):
+#		$AttackTimer.wait_time = RATE_OF_FIRE_SECONDS_PER_SHOT
+#		var _connect_result = $AttackTimer.connect("timeout", self, "_fire_projectile")
+#		$AttackTimer.start()
+	pass
 
 func player_is_visible():
 	var is_visible = false
@@ -251,14 +267,12 @@ func player_is_visible():
 				$VisionRaycast.look_at(player_node.translation + HEIGHT_OF_PLAYER, Vector3.UP)
 				$VisionRaycast.force_raycast_update()
 
-				if $VisionRaycast.is_colliding():
-					var collider = $VisionRaycast.get_collider()
-					if collider.name == "Player":
-						if ! grid_map_is_in_the_way(player_node.translation):
-							if self._enemy_position == null:
-								self._enemy_position = player_node.translation
-							is_visible = true
-						break
+				if ! grid_map_is_in_the_way(player_node.translation):
+					if self._enemy_position == null:
+						self._enemy_position = player_node.translation
+					is_visible = true
+				break
+
 	return is_visible
 
 # for firing projectiles
@@ -321,9 +335,9 @@ func _physics_process(delta):
 #	vec_to_player = vec_to_player.normalized()
 #	raycast.cast_to = vec_to_player * 1.5
 	
-	move_and_collide(vec_to_player * MOVE_SPEED * delta)
+#	move_and_collide(vec_to_player * MOVE_SPEED * delta)
 	
-	var move_vec = vec_to_player
+	var move_vec = Vector3()
 	move_vec.y -= gravity * delta
 	move_vec = move_and_slide(move_vec, Vector3.UP)
 	
@@ -335,6 +349,23 @@ func _physics_process(delta):
 
 func _fade_away():
 	queue_free()
+
+
+func recieve_damage(collision_point):
+	if _current_state != STATES.DECEASED:
+		#if _is_headshot(collision_point):
+		#	num_health_points = 0
+		#else:		
+		#	num_health_points -= 3
+			
+		num_health_points -= 3
+		
+		if _current_state != STATES.COMBAT: #TODO: make independent of current state. timing could be off?
+			if ! is_alerted:
+				self.has_just_been_alerted = true
+#		if num_health_points >= 0:
+#			EnemySoundController.play_next_injury_sound()
+
 
 func die():
 	dead = true

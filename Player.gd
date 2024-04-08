@@ -16,7 +16,6 @@ func _ready():
 
 func _input(event):
 	if event is InputEventMouseMotion:
-		print(rotation_degrees)
 		rotation_degrees.y -= MOUSE_SENS * event.relative.x
 		rotation_degrees.x -= MOUSE_SENS * event.relative.y
 		
@@ -54,7 +53,7 @@ func _physics_process(delta):
 		anim_player.play("shoot")
 		var coll = raycast.get_collider()
 		if raycast.is_colliding() and coll.has_method("die"):
-			coll.die()
+			raycast.get_collider().recieve_damage(raycast.get_collision_point())
 
 func die():
 	get_tree().reload_current_scene()

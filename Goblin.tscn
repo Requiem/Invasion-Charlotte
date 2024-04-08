@@ -22,8 +22,6 @@ texture = ExtResource( 2 )
 
 [node name="RayCast" type="RayCast" parent="."]
 
-[node name="ObliterationTimer" type="Timer" parent="."]
-
 [node name="NavigationAgent" type="NavigationAgent" parent="."]
 
 [node name="VisionRaycast" type="RayCast" parent="."]
@@ -37,3 +35,15 @@ debug_shape_custom_color = Color( 0.690196, 0, 0, 1 )
 [node name="CollisionShape" type="CollisionShape" parent="VisionArea"]
 transform = Transform( 3, 0, 0, 0, -3.93403e-07, -1, 0, 9, -4.37114e-08, 0, 0.5, -9.25 )
 shape = SubResource( 2 )
+
+[node name="CombatReactionTimer" type="Timer" parent="."]
+wait_time = 0.25
+one_shot = true
+
+[node name="TargetTrackerTimer" type="Timer" parent="."]
+
+[node name="AttackTimer" type="Timer" parent="."]
+wait_time = 0.3
+autostart = true
+
+[node name="ObliterationTimer" type="Timer" parent="."]
