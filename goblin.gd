@@ -12,6 +12,7 @@ export var RATE_OF_FIRE_SECONDS_PER_SHOT = 0.3
 const HEIGHT_OF_PLAYER = Vector3(0, 1.5, 0) #TODO: is this correct?
 const STARTING_HEALTH_POINTS = 3
 const SMELLING_DISTANCE = 20
+const MELEE_RANGE = 1
 
 const gravity = 320
 
@@ -152,8 +153,12 @@ func _exit_combat():
 
 
 func stop_attacking():
-#	if $AttackTimer.is_connected("timeout", self, "_fire_projectile"):
-#		$AttackTimer.disconnect("timeout", self, "_fire_projectile")
+	if $AttackTimer.is_connected("timeout", self, "_melee_attack"):
+		$AttackTimer.disconnect("timeout", self, "_melee_attack")
+
+
+func _melee_attack():
+	print("debug Melee attacked ")
 	pass
 
 
@@ -234,7 +239,7 @@ func _run_state_dependent_processes():
 		
 		turn_towards_target(navAgent.get_next_location())	
 		self._enemy_position = player_node.translation
-		if player_is_visible() and self._enemy_position != null and self.has_reacted_to_attack:
+		if player_is_visible() and self._enemy_position != null and self.has_reacted_to_attack and _is_within_attack_range():
 			#meshAnimationTree["parameters/running/Blend2/blend_amount"] = 0.0
 			attack()
 		elif self.has_reacted_to_attack:
@@ -243,6 +248,11 @@ func _run_state_dependent_processes():
 
 	elif _current_state == STATES.DECEASED:
 		pass
+
+
+func _is_within_attack_range():
+	var distance_to_enemy = translation.distance_to(self._enemy_position)
+	return distance_to_enemy < MELEE_RANGE
 
 
 func _move_toward_position(target_pos):
@@ -255,18 +265,23 @@ func _move_toward_position(target_pos):
 #	self.actual_velocity.y -= 4.0
 #	var _move_result = move_and_slide(self.actual_velocity*10, Vector3.UP)
 	#meshAnimationTree["parameters/running/Blend2/blend_amount"] = 1.0
+	var vec_to_player = player_node.translation
 	
-	var vec_to_player = player_node.translation - translation
-	vec_to_player = vec_to_player.normalized()
+	var direction = global_transform.origin.direction_to(vec_to_player)
+	var final_velocity = direction * MOVE_SPEED
+	
+	#vec_to_player = vec_to_player.normalized()
 	self.look_at(player_node.translation, Vector3.UP)
-	move_and_slide(vec_to_player * MOVE_SPEED)	
+	move_and_slide(final_velocity * MOVE_SPEED)	
+	
 
 func attack():
-#	if not $AttackTimer.is_connected("timeout", self, "_fire_projectile"):
-#		$AttackTimer.wait_time = RATE_OF_FIRE_SECONDS_PER_SHOT
-#		var _connect_result = $AttackTimer.connect("timeout", self, "_fire_projectile")
-#		$AttackTimer.start()
+	if not $AttackTimer.is_connected("timeout", self, "_melee_attack"):
+		$AttackTimer.wait_time = RATE_OF_FIRE_SECONDS_PER_SHOT
+		var _connect_result = $AttackTimer.connect("timeout", self, "_melee_attack")
+		$AttackTimer.start()
 	pass
+
 
 func player_is_visible():
 	var is_visible = false
@@ -282,6 +297,8 @@ func player_is_visible():
 						self._enemy_position = player_node.translation
 					is_visible = true
 				break
+	else:
+		is_visible = true
 
 	return is_visible
 
