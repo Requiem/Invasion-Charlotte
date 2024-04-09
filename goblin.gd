@@ -340,7 +340,7 @@ func _physics_process(delta):
 	
 	var move_vec = Vector3()
 	move_vec.y -= gravity * delta
-	move_vec = move_and_slide(move_vec, Vector3.UP)
+#	move_vec = move_and_slide(move_vec, Vector3.UP)
 
 	if dead:
 		return

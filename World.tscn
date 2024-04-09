@@ -30,3 +30,4 @@ __meta__ = {
 }
 
 [node name="Hornet" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0 )
