@@ -77,10 +77,11 @@ func _ready():
 	num_health_points = STARTING_HEALTH_POINTS
 	_update_state_machine()
 
+	_register_listener_for_player_gun_sounds()
+	
 
 func _update_state_machine():
 	_previous_state = _current_state
-	
 	
 	if _current_state == STATES.INIT:
 		_current_state = STATES.IDLE
@@ -179,12 +180,19 @@ func _remove_npc_from_player_collisions():
 	
 
 func _register_listener_for_player_gun_sounds():
-	player_node.connect("gun_fired", self, "_react_to_gun_sound_if_close")
+	player_node.connect("gun_fired", self, "_react_to_gun_sound")
 
 
 func _unregister_listener_for_player_gun_sounds():
-	player_node.disconnect("gun_fired", self, "_react_to_gun_sound_if_close")
+	player_node.disconnect("gun_fired", self, "_react_to_gun_sound")
 
+
+func _react_to_gun_sound():
+#	if can_hear and Vector3(global_transform.origin - player_node.global_transform.origin).length() <= MAXIMUM_EARSHOT_DISTANCE * weapon_noise_level_ratio:
+#		if ! is_alerted:
+#			self.has_just_been_alerted = true
+	if can_hear and ! is_alerted:
+		self.has_just_been_alerted = true
 
 func _enter_combat():
 	if not $CombatReactionTimer.is_connected("timeout", self, "_start_attacking"):

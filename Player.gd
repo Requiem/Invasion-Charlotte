@@ -7,6 +7,8 @@ const gravity = 320
 onready var anim_player = $AnimationPlayer
 onready var raycast = $RayCast
 
+signal gun_fired
+
 func _ready():
 	Global.player_node = self
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -51,6 +53,9 @@ func _physics_process(delta):
 	
 	if Input.is_action_pressed("shoot") and !anim_player.is_playing():
 		anim_player.play("shoot")
+		
+		emit_signal("gun_fired")
+		
 		var coll = raycast.get_collider()
 		if raycast.is_colliding() and coll.has_method("die"):
 			raycast.get_collider().recieve_damage(raycast.get_collision_point())
