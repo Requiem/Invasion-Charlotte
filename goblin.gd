@@ -12,7 +12,7 @@ export var RATE_OF_FIRE_SECONDS_PER_SHOT = 0.3
 const HEIGHT_OF_PLAYER = Vector3(0, 1.5, 0) #TODO: is this correct?
 const STARTING_HEALTH_POINTS = 3
 const SMELLING_DISTANCE = 20
-const MELEE_RANGE = 1
+const MELEE_RANGE = 3
 
 const gravity = 320
 
@@ -362,10 +362,11 @@ func _physics_process(delta):
 #	raycast.cast_to = vec_to_player * 1.5
 	
 #	move_and_collide(vec_to_player * MOVE_SPEED * delta)
-	
-	var move_vec = Vector3()
-	move_vec.y -= gravity * delta
-#	move_vec = move_and_slide(move_vec, Vector3.UP)
+
+	if not self.is_in_group("flyers"):
+		var move_vec = Vector3()
+		move_vec.y -= gravity * delta
+		move_vec = move_and_slide(move_vec, Vector3.UP)
 
 	if dead:
 		return
