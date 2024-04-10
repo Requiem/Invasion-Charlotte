@@ -6,7 +6,7 @@
 
 extends KinematicBody
 
-const MOVE_SPEED = 3
+const MOVE_SPEED = 2
 export var ACCELERATION_RATE = 0.1
 export var RATE_OF_FIRE_SECONDS_PER_SHOT = 0.3
 const HEIGHT_OF_PLAYER = Vector3(0, 1.5, 0) #TODO: is this correct?
