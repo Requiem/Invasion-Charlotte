@@ -7,6 +7,8 @@ const gravity = 320
 onready var anim_player = $AnimationPlayer
 onready var raycast = $RayCast
 
+onready var player_health = 5
+
 signal gun_fired
 
 func _ready():
@@ -59,6 +61,33 @@ func _physics_process(delta):
 		var coll = raycast.get_collider()
 		if raycast.is_colliding() and coll.has_method("die"):
 			raycast.get_collider().recieve_damage(raycast.get_collision_point())
+
+func receive_damage():
+	player_health -= 1
+	
+	if player_health == 4:
+		$CanvasLayer/Heart5.hide()
+	elif player_health == 3 :
+		$CanvasLayer/Heart4.hide()
+	elif player_health == 2:
+		$CanvasLayer/Heart3.hide()
+	elif player_health == 1:
+		$CanvasLayer/Heart2.hide()
+	elif player_health == 0:
+		die()
+		
+func heal(amount):
+	player_health += amount
+	
+	if player_health > 1:
+		$CanvasLayer/Heart2.show()
+	if player_health > 2 :
+		$CanvasLayer/Heart3.show()
+	if player_health > 3:
+		$CanvasLayer/Heart4.show()
+	if player_health > 5:
+		$CanvasLayer/Heart5.show()
+		player_health = 5
 
 func die():
 	get_tree().reload_current_scene()
