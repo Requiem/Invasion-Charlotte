@@ -1,9 +1,3 @@
-
-
-
-
-
-
 extends KinematicBody
 
 const MOVE_SPEED = 2
@@ -394,6 +388,8 @@ func recieve_damage(collision_point):
 		#	num_health_points -= 3
 			
 		num_health_points -= 3
+		$Sprite3D.modulate = Color8(255,0,0)
+		$DamageTimer.start()
 		
 		if _current_state != STATES.COMBAT: #TODO: make independent of current state. timing could be off?
 			if ! is_alerted:
@@ -411,3 +407,6 @@ func die():
 
 func set_player(p):
 	player = p
+
+func _on_DamageTimer_timeout():
+	$Sprite3D.modulate = Color8(255,255,255) 

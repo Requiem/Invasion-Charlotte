@@ -135,6 +135,7 @@ func _process(_delta):
 	_run_state_exit_events()
 	_run_state_enter_events()
 	_run_state_dependent_processes()
+	#$Sprite3D.modulate = Color8(255, 255, 255)
 
 
 func _run_state_exit_events():
@@ -394,6 +395,8 @@ func recieve_damage(collision_point):
 		#	num_health_points -= 3
 			
 		num_health_points -= 3
+		$Sprite3D.modulate = Color8(255, 0, 0)
+		$DamageTimer.start()
 		
 		if _current_state != STATES.COMBAT: #TODO: make independent of current state. timing could be off?
 			if ! is_alerted:
@@ -412,13 +415,5 @@ func die():
 func set_player(p):
 	player = p
 
-
-
-
-
-
-
-
-
-
-
+func _on_DamageTimer_timeout():
+	$Sprite3D.modulate = Color8(255,255,255) 
