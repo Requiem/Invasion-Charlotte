@@ -55,7 +55,6 @@ current = true
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
-visible = false
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -72,8 +71,8 @@ anchor_right = 0.5
 anchor_bottom = 1.0
 
 [node name="Sprite" type="Sprite" parent="CanvasLayer/Control"]
-position = Vector2( -1, -276 )
-scale = Vector2( 8.625, 8.625 )
+position = Vector2( 0, -186 )
+scale = Vector2( 6, 6 )
 texture = ExtResource( 3 )
 hframes = 5
 

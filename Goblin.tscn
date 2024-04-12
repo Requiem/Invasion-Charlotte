@@ -49,3 +49,10 @@ wait_time = 0.3
 autostart = true
 
 [node name="ObliterationTimer" type="Timer" parent="."]
+wait_time = 0.25
+
+[node name="DamageTimer" type="Timer" parent="."]
+wait_time = 0.15
+one_shot = true
+
+[connection signal="timeout" from="DamageTimer" to="." method="_on_DamageTimer_timeout"]
