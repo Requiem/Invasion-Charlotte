@@ -8,12 +8,12 @@ func _ready():
 	
 	
 func _physics_process(delta):
-	for tree in get_tree().get_nodes_in_group("trees"):
-		tree.look_at(Global.player_node.global_translation, Vector3.UP)
-	for tree in get_tree().get_nodes_in_group("cars"):
-		tree.look_at(Global.player_node.global_translation, Vector3.UP)
+	for object in get_tree().get_nodes_in_group("environment_objects"):
+		var temp = Global.player_node.global_translation
+		temp.y = 0
+		object.look_at(temp, Vector3.UP)
 	
-
+	
 func spawn_enemies():
 	for spawn_point in get_tree().get_nodes_in_group("enemy_spawn_points"):
 		spawn_goblin(spawn_point.translation)
