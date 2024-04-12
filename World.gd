@@ -10,6 +10,8 @@ func _ready():
 func _physics_process(delta):
 	for tree in get_tree().get_nodes_in_group("trees"):
 		tree.look_at(Global.player_node.global_translation, Vector3.UP)
+	for tree in get_tree().get_nodes_in_group("cars"):
+		tree.look_at(Global.player_node.global_translation, Vector3.UP)
 	
 
 func spawn_enemies():
