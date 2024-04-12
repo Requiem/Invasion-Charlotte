@@ -21,6 +21,7 @@ func spawn_enemies():
 
 func spawn_goblin(_position):
 	var goblinInstance = Goblin.instance()
+	goblinInstance.starting_pos = _position
 	goblinInstance.translation = _position
 	add_child(goblinInstance)
 

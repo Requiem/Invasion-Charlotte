@@ -23,7 +23,7 @@ var player_node
 
 var player = null
 var dead = false
-
+var starting_pos
 
 ###  AI code
 var navAgent : NavigationAgent
@@ -77,6 +77,7 @@ func _ready():
 	_current_state = STATES.INIT
 	num_health_points = STARTING_HEALTH_POINTS
 	_update_state_machine()
+
 
 	_register_listener_for_player_gun_sounds()
 	
@@ -150,6 +151,7 @@ func _un_alert_the_npc():
 
 func _exit_combat():
 	stop_attacking()
+	var _disconnect_result = $CombatReactionTimer.disconnect("timeout", self, "_start_attacking")
 	$TargetTrackerTimer.disconnect("timeout", self, "track_target")
 
 
@@ -384,7 +386,7 @@ func _physics_process(delta):
 
 
 func _fade_away():
-	queue_free()
+	die()
 
 
 func recieve_damage(collision_point):
@@ -409,8 +411,19 @@ func die():
 	dead = true
 	$CollisionShape.disabled = true
 #	anim_player.play("die")
-	$ObliterationTimer.connect("timeout", self, "_fade_away")
-	$ObliterationTimer.start()
+	$ObliterationTimer.disconnect("timeout", self, "_fade_away")
+	respawn()
+
+
+func respawn():
+	translation = starting_pos
+	$CollisionShape.disabled = false
+	dead = false
+
+	_current_state = STATES.INIT
+	num_health_points = STARTING_HEALTH_POINTS
+	_register_listener_for_player_gun_sounds()
+
 
 func set_player(p):
 	player = p

@@ -50,6 +50,7 @@ autostart = true
 
 [node name="ObliterationTimer" type="Timer" parent="."]
 wait_time = 0.25
+one_shot = true
 
 [node name="DamageTimer" type="Timer" parent="."]
 wait_time = 0.15
