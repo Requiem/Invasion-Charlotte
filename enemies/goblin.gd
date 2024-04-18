@@ -416,12 +416,12 @@ func die():
 	respawn()
 
 
-func respawn():
+func respawn():	
 	if (tv_spawn_node != null):
 		tv_spawn_node.spawn()
-	else:
+		queue_free()
+	else:		
 		$CollisionShape.disabled = false
-			
 		translation = starting_pos
 		dead = false
 
