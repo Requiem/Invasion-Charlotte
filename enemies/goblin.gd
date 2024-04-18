@@ -24,6 +24,7 @@ var player_node
 var player = null
 var dead = false
 var starting_pos
+var tv_spawn_node
 
 ###  AI code
 var navAgent : NavigationAgent
@@ -75,7 +76,7 @@ func _ready():
 
 	
 	_current_state = STATES.INIT
-	num_health_points = STARTING_HEALTH_POINTS
+	num_health_points = STARTING_HEALTH_POINTS 
 	_update_state_machine()
 
 
@@ -416,13 +417,19 @@ func die():
 
 
 func respawn():
-	translation = starting_pos
-	$CollisionShape.disabled = false
-	dead = false
+	if (tv_spawn_node != null):
+		tv_spawn_node.spawn()
+	else:
+		$CollisionShape.disabled = false
+			
+		translation = starting_pos
+		dead = false
 
-	_current_state = STATES.INIT
-	num_health_points = STARTING_HEALTH_POINTS
-	_register_listener_for_player_gun_sounds()
+		_current_state = STATES.INIT
+		num_health_points = STARTING_HEALTH_POINTS
+		_register_listener_for_player_gun_sounds()
+		
+
 
 
 func set_player(p):
