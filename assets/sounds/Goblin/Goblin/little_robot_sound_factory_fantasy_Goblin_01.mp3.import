@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/little_robot_sound_factory_fantasy_Goblin_01.mp3-f15000e81e9ad7b8c9cb265751702ab6.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/Goblin/Goblin/little_robot_sound_factory_fantasy_Goblin_01.mp3"
+dest_files=[ "res://.import/little_robot_sound_factory_fantasy_Goblin_01.mp3-f15000e81e9ad7b8c9cb265751702ab6.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

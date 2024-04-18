@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/soundbits_ScreamsShouts2_Monsters_Monster_Roar_Growl_159.mp3-960653ae517f8d5fac975cd1c517c645.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/Goblin/Goblin/soundbits_ScreamsShouts2_Monsters_Monster_Roar_Growl_159.mp3"
+dest_files=[ "res://.import/soundbits_ScreamsShouts2_Monsters_Monster_Roar_Growl_159.mp3-960653ae517f8d5fac975cd1c517c645.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

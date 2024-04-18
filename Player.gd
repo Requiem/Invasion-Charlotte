@@ -58,6 +58,9 @@ func _physics_process(delta):
 		
 		emit_signal("gun_fired")
 		
+		$crossbowSound.pitch_scale = rand_range(0.9,1.1)
+		$crossbowSound.play()
+		
 		var coll = raycast.get_collider()
 		if raycast.is_colliding() and coll.has_method("die"):
 			raycast.get_collider().recieve_damage(raycast.get_collision_point())

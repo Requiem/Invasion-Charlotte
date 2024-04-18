@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Player.gd" type="Script" id=1]
 [ext_resource path="res://crosshair.png" type="Texture" id=2]
 [ext_resource path="res://assets/crossbow.png" type="Texture" id=3]
 [ext_resource path="res://assets/heart.png" type="Texture" id=4]
+[ext_resource path="res://assets/sounds/Crossbow_Shot.wav" type="AudioStream" id=5]
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.5
@@ -108,3 +109,6 @@ anims/shoot = SubResource( 3 )
 [node name="RayCast" type="RayCast" parent="."]
 enabled = true
 cast_to = Vector3( 0, 0, -2000 )
+
+[node name="crossbowSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
