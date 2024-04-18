@@ -2,8 +2,8 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/stone_gray_0.png-c84c0a3a1c452ccd8e33f9405031029b.s3tc.stex"
-path.etc2="res://.import/stone_gray_0.png-c84c0a3a1c452ccd8e33f9405031029b.etc2.stex"
+path.s3tc="res://.import/centaurArcher.png-8a49e53e03622193332506dad3604eec.s3tc.stex"
+path.etc2="res://.import/centaurArcher.png-8a49e53e03622193332506dad3604eec.etc2.stex"
 metadata={
 "imported_formats": [ "s3tc", "etc2" ],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/stone_gray_0.png"
-dest_files=[ "res://.import/stone_gray_0.png-c84c0a3a1c452ccd8e33f9405031029b.s3tc.stex", "res://.import/stone_gray_0.png-c84c0a3a1c452ccd8e33f9405031029b.etc2.stex" ]
+source_file="res://assets/enemies/centaurArcher.png"
+dest_files=[ "res://.import/centaurArcher.png-8a49e53e03622193332506dad3604eec.s3tc.stex", "res://.import/centaurArcher.png-8a49e53e03622193332506dad3604eec.etc2.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/mode=2
 compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0
-compress/normal_map=1
+compress/normal_map=0
 flags/repeat=true
 flags/filter=true
 flags/mipmaps=true

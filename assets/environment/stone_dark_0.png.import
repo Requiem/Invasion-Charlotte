@@ -2,8 +2,8 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/goblin1.png-a4ac5da91add9d9e99735e55190f3d91.s3tc.stex"
-path.etc2="res://.import/goblin1.png-a4ac5da91add9d9e99735e55190f3d91.etc2.stex"
+path.s3tc="res://.import/stone_dark_0.png-11f889948e41223baade9d44fb5c16e7.s3tc.stex"
+path.etc2="res://.import/stone_dark_0.png-11f889948e41223baade9d44fb5c16e7.etc2.stex"
 metadata={
 "imported_formats": [ "s3tc", "etc2" ],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/goblin1.png"
-dest_files=[ "res://.import/goblin1.png-a4ac5da91add9d9e99735e55190f3d91.s3tc.stex", "res://.import/goblin1.png-a4ac5da91add9d9e99735e55190f3d91.etc2.stex" ]
+source_file="res://assets/environment/stone_dark_0.png"
+dest_files=[ "res://.import/stone_dark_0.png-11f889948e41223baade9d44fb5c16e7.s3tc.stex", "res://.import/stone_dark_0.png-11f889948e41223baade9d44fb5c16e7.etc2.stex" ]
 
 [params]
 

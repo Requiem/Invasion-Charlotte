@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/darkOne.png-64ac24ce37dd1592993963611a19dcca.stex"
+path="res://.import/darkOne.png-9dbc7de7724dc05835eae0506172f0ce.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/darkOne.png"
-dest_files=[ "res://.import/darkOne.png-64ac24ce37dd1592993963611a19dcca.stex" ]
+source_file="res://assets/enemies/darkOne.png"
+dest_files=[ "res://.import/darkOne.png-9dbc7de7724dc05835eae0506172f0ce.stex" ]
 
 [params]
 

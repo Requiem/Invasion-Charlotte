@@ -2,8 +2,8 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/centaur.png-7fb45d6f4604548b9fe40e7f56871a6d.s3tc.stex"
-path.etc2="res://.import/centaur.png-7fb45d6f4604548b9fe40e7f56871a6d.etc2.stex"
+path.s3tc="res://.import/centaur.png-d6578a1ed688cc67278089180f8c6b6e.s3tc.stex"
+path.etc2="res://.import/centaur.png-d6578a1ed688cc67278089180f8c6b6e.etc2.stex"
 metadata={
 "imported_formats": [ "s3tc", "etc2" ],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/centaur.png"
-dest_files=[ "res://.import/centaur.png-7fb45d6f4604548b9fe40e7f56871a6d.s3tc.stex", "res://.import/centaur.png-7fb45d6f4604548b9fe40e7f56871a6d.etc2.stex" ]
+source_file="res://assets/enemies/centaur.png"
+dest_files=[ "res://.import/centaur.png-d6578a1ed688cc67278089180f8c6b6e.s3tc.stex", "res://.import/centaur.png-d6578a1ed688cc67278089180f8c6b6e.etc2.stex" ]
 
 [params]
 

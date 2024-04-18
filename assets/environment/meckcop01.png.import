@@ -2,8 +2,8 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/hornet.png-6112eac3672c619862cd75869cc8bea0.s3tc.stex"
-path.etc2="res://.import/hornet.png-6112eac3672c619862cd75869cc8bea0.etc2.stex"
+path.s3tc="res://.import/meckcop01.png-6fa23306bec81240803ec5f738fe1e8c.s3tc.stex"
+path.etc2="res://.import/meckcop01.png-6fa23306bec81240803ec5f738fe1e8c.etc2.stex"
 metadata={
 "imported_formats": [ "s3tc", "etc2" ],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/hornet.png"
-dest_files=[ "res://.import/hornet.png-6112eac3672c619862cd75869cc8bea0.s3tc.stex", "res://.import/hornet.png-6112eac3672c619862cd75869cc8bea0.etc2.stex" ]
+source_file="res://assets/environment/meckcop01.png"
+dest_files=[ "res://.import/meckcop01.png-6fa23306bec81240803ec5f738fe1e8c.s3tc.stex", "res://.import/meckcop01.png-6fa23306bec81240803ec5f738fe1e8c.etc2.stex" ]
 
 [params]
 

@@ -2,8 +2,8 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/meckcop01.png-d913e6277b67ad625dbaca061816442f.s3tc.stex"
-path.etc2="res://.import/meckcop01.png-d913e6277b67ad625dbaca061816442f.etc2.stex"
+path.s3tc="res://.import/hornet.png-5698ef24a95e9d5ac4804d3b6dfe133e.s3tc.stex"
+path.etc2="res://.import/hornet.png-5698ef24a95e9d5ac4804d3b6dfe133e.etc2.stex"
 metadata={
 "imported_formats": [ "s3tc", "etc2" ],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/meckcop01.png"
-dest_files=[ "res://.import/meckcop01.png-d913e6277b67ad625dbaca061816442f.s3tc.stex", "res://.import/meckcop01.png-d913e6277b67ad625dbaca061816442f.etc2.stex" ]
+source_file="res://assets/enemies/hornet.png"
+dest_files=[ "res://.import/hornet.png-5698ef24a95e9d5ac4804d3b6dfe133e.s3tc.stex", "res://.import/hornet.png-5698ef24a95e9d5ac4804d3b6dfe133e.etc2.stex" ]
 
 [params]
 

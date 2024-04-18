@@ -2,8 +2,8 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/tree_2_green.png-2fcf22c0f2f8b7e6d09f0ed65ccc56f5.s3tc.stex"
-path.etc2="res://.import/tree_2_green.png-2fcf22c0f2f8b7e6d09f0ed65ccc56f5.etc2.stex"
+path.s3tc="res://.import/tree_2_green.png-ab1463a1d650779a2b6811315a2a28ec.s3tc.stex"
+path.etc2="res://.import/tree_2_green.png-ab1463a1d650779a2b6811315a2a28ec.etc2.stex"
 metadata={
 "imported_formats": [ "s3tc", "etc2" ],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/tree_2_green.png"
-dest_files=[ "res://.import/tree_2_green.png-2fcf22c0f2f8b7e6d09f0ed65ccc56f5.s3tc.stex", "res://.import/tree_2_green.png-2fcf22c0f2f8b7e6d09f0ed65ccc56f5.etc2.stex" ]
+source_file="res://assets/environment/tree_2_green.png"
+dest_files=[ "res://.import/tree_2_green.png-ab1463a1d650779a2b6811315a2a28ec.s3tc.stex", "res://.import/tree_2_green.png-ab1463a1d650779a2b6811315a2a28ec.etc2.stex" ]
 
 [params]
 
