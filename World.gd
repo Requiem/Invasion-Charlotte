@@ -1,6 +1,6 @@
 extends Spatial
 
-var Goblin = load("res://Goblin.tscn")
+var Goblin = load("res://enemies/Goblin.tscn")
 
 
 func _ready():
