@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://EnemySpawnPoint.gd" type="Script" id=1]
+
+[node name="Position3D" type="Position3D" groups=["enemy_spawn_points"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 3, -4.5 )
+script = ExtResource( 1 )

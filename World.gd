@@ -15,8 +15,10 @@ func _physics_process(delta):
 	
 	
 func spawn_enemies():
-	for spawn_point in get_tree().get_nodes_in_group("enemy_spawn_points"):
-		spawn_goblin(spawn_point.translation)
+	var spawn_point_list = get_tree().get_nodes_in_group("enemy_spawn_points") 
+	for spawn_point in spawn_point_list:
+		if spawn_point.spawning_is_enabled:
+			spawn_goblin(spawn_point.translation)
 	
 
 func spawn_goblin(_position):
@@ -30,3 +32,13 @@ func spawn_goblin(_position):
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
+
+
+func enable_spawn_points():
+	for spawn_point in get_tree().get_nodes_in_group("enemy_spawn_points"):
+		spawn_point.spawning_is_enabled = true
+
+
+func _on_firstTV_tree_exited():
+	enable_spawn_points()
+	spawn_enemies()

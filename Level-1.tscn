@@ -7,7 +7,7 @@
 [ext_resource path="res://assets/environment/tree_2_green.png" type="Texture" id=5]
 [ext_resource path="res://HealthPack.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Television.tscn" type="PackedScene" id=7]
-[ext_resource path="res://enemies/Goblin.tscn" type="PackedScene" id=8]
+[ext_resource path="res://enemies/EnemySpawnPoint.tscn" type="PackedScene" id=9]
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 1, 1, 11 )
@@ -363,13 +363,10 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 45, 0, 0 )
 [node name="CollisionShape" type="CollisionShape" parent="WorldBarrier-1"]
 shape = SubResource( 1 )
 
-[node name="TV" parent="." groups=["environment_objects"] instance=ExtResource( 7 )]
+[node name="firstTV" parent="." groups=["environment_objects"] instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 0, 1 )
 
-[node name="Goblin" parent="." instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, 5 )
-
-[node name="Position3D" type="Position3D" parent="." groups=["enemy_spawn_points"]]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 3, -4.5 )
+[node name="GoblinSpawnPoint1" parent="." instance=ExtResource( 9 )]
 
 [connection signal="body_entered" from="HealthPack" to="HealthPack" method="_on_HealthPack_body_entered"]
+[connection signal="tree_exited" from="firstTV" to="." method="_on_firstTV_tree_exited"]
