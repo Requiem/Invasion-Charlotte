@@ -413,11 +413,15 @@ func die():
 	$CollisionShape.disabled = true
 #	anim_player.play("die")
 	$ObliterationTimer.disconnect("timeout", self, "_fade_away")
-	respawn()
+	
+	if (tv_spawn_node != null and ! is_instance_valid(tv_spawn_node)):
+		queue_free()
+	else:
+		respawn()
 
 
 func respawn():	
-	if (tv_spawn_node != null):
+	if (tv_spawn_node != null and is_instance_valid(tv_spawn_node)):
 		tv_spawn_node.spawn()
 		queue_free()
 	else:		

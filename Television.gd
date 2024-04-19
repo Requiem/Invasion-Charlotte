@@ -1,9 +1,11 @@
-extends Area
+extends Node
 
 var Goblin = load("res://enemies/Goblin.tscn")
 var GoblinSprite = load("res://assets/enemies/goblin1.png")
 const TELEVISION_IMAGE_GROW_DURATION = 3
 var is_spawning = false
+
+var health_points = 10
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -16,15 +18,20 @@ func _jump_out_of_tv():
 	var goblinInstance = Goblin.instance()
 	goblinInstance.tv_spawn_node = self
 	get_tree().get_root().add_child(goblinInstance)
-	goblinInstance.starting_pos = translation
-	goblinInstance.translation = translation
+	goblinInstance.starting_pos = self.translation
+	goblinInstance.translation = self.translation
 	$Tween.stop_all()
 
 
-func _on_TV_body_entered(body):
-	if body.is_in_group("player") and not is_spawning:
-		spawn()
-	
+func recieve_damage(collision_point):
+		health_points -= 4
+		if (health_points <= 0):
+			die()
+
+
+func die():
+	queue_free()
+
 
 func spawn():
 	_grow_enemy_sprite()
@@ -44,3 +51,7 @@ func _grow_enemy_sprite():
 	$Tween.interpolate_property($whatsOnTV, "translation", Vector3(0, 0.35, -0.1), Vector3(0, 0.75, -0.1), TELEVISION_IMAGE_GROW_DURATION, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	$Tween.start()
 
+
+func _on_DetectionArea_body_entered(body):
+	if body.is_in_group("player") and not is_spawning:
+		spawn()
