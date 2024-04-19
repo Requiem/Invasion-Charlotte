@@ -24,6 +24,7 @@ func spawn_goblin(_position):
 	goblinInstance.starting_pos = _position
 	goblinInstance.translation = _position
 	add_child(goblinInstance)
+	goblinInstance.should_respawn = true
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

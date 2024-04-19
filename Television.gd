@@ -20,6 +20,7 @@ func _jump_out_of_tv():
 	get_tree().get_root().add_child(goblinInstance)
 	goblinInstance.starting_pos = self.translation
 	goblinInstance.translation = self.translation
+	goblinInstance.should_respawn = true
 	$Tween.stop_all()
 
 

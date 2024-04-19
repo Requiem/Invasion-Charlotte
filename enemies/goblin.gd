@@ -25,6 +25,7 @@ var player = null
 var dead = false
 var starting_pos
 var tv_spawn_node
+var should_respawn
 
 ###  AI code
 var navAgent : NavigationAgent
@@ -66,6 +67,7 @@ var _enemy_position = null
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	should_respawn = false
 	player_node = Global.player_node
 #	anim_player.play("walk")
 	add_to_group("zombies")
@@ -415,6 +417,8 @@ func die():
 	$ObliterationTimer.disconnect("timeout", self, "_fade_away")
 	
 	if (tv_spawn_node != null and ! is_instance_valid(tv_spawn_node)):
+		queue_free()
+	elif ( ! should_respawn):
 		queue_free()
 	else:
 		respawn()
