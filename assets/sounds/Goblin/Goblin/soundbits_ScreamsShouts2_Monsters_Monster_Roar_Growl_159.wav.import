@@ -1,0 +1,23 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/soundbits_ScreamsShouts2_Monsters_Monster_Roar_Growl_159.wav-bb6c124e94d35c991b4fa01166eaffa8.sample"
+
+[deps]
+
+source_file="res://assets/sounds/Goblin/Goblin/soundbits_ScreamsShouts2_Monsters_Monster_Roar_Growl_159.wav"
+dest_files=[ "res://.import/soundbits_ScreamsShouts2_Monsters_Monster_Roar_Growl_159.wav-bb6c124e94d35c991b4fa01166eaffa8.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0
