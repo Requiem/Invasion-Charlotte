@@ -2,8 +2,8 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/stone_gray_0.png-637501f2d8cf9c1fc092193e05767eeb.s3tc.stex"
-path.etc2="res://.import/stone_gray_0.png-637501f2d8cf9c1fc092193e05767eeb.etc2.stex"
+path.s3tc="res://.import/dirt_1_new.png-e49579f56aaa3f78fe3ee6b4ea659d4f.s3tc.stex"
+path.etc2="res://.import/dirt_1_new.png-e49579f56aaa3f78fe3ee6b4ea659d4f.etc2.stex"
 metadata={
 "imported_formats": [ "s3tc", "etc2" ],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/environment/stone_gray_0.png"
-dest_files=[ "res://.import/stone_gray_0.png-637501f2d8cf9c1fc092193e05767eeb.s3tc.stex", "res://.import/stone_gray_0.png-637501f2d8cf9c1fc092193e05767eeb.etc2.stex" ]
+source_file="res://assets/environment/dirt_1_new.png"
+dest_files=[ "res://.import/dirt_1_new.png-e49579f56aaa3f78fe3ee6b4ea659d4f.s3tc.stex", "res://.import/dirt_1_new.png-e49579f56aaa3f78fe3ee6b4ea659d4f.etc2.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/mode=2
 compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0
-compress/normal_map=1
+compress/normal_map=0
 flags/repeat=true
 flags/filter=false
 flags/mipmaps=true

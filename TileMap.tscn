@@ -1,0 +1,40 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://assets/environment/enter_dis.png" type="Texture" id=1]
+[ext_resource path="res://assets/environment/dirt_1_new.png" type="Texture" id=2]
+
+[sub_resource type="CubeMesh" id=1]
+
+[sub_resource type="SpatialMaterial" id=12]
+albedo_texture = ExtResource( 2 )
+
+[sub_resource type="BoxShape" id=10]
+
+[sub_resource type="CubeMesh" id=4]
+
+[sub_resource type="BoxShape" id=11]
+
+[node name="MeshLibrary" type="Spatial"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0 )
+
+[node name="dirt-1-new" type="MeshInstance" parent="."]
+mesh = SubResource( 1 )
+material/0 = SubResource( 12 )
+
+[node name="StaticBody" type="StaticBody" parent="dirt-1-new"]
+
+[node name="CollisionShape" type="CollisionShape" parent="dirt-1-new/StaticBody"]
+shape = SubResource( 10 )
+
+[node name="enter-dis" type="MeshInstance" parent="."]
+mesh = SubResource( 4 )
+
+[node name="Sprite3D" type="Sprite3D" parent="enter-dis"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.01, 1 )
+pixel_size = 0.06
+texture = ExtResource( 1 )
+
+[node name="StaticBody" type="StaticBody" parent="enter-dis"]
+
+[node name="CollisionShape" type="CollisionShape" parent="enter-dis/StaticBody"]
+shape = SubResource( 11 )
