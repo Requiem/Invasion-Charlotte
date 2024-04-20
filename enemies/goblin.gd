@@ -19,7 +19,6 @@ const gravity = 320
 var player_node
 
 #onready var raycast = $RayCast
-#onready var anim_player = $AnimationPlayer
 
 var player = null
 var dead = false
@@ -69,7 +68,10 @@ var _enemy_position = null
 func _ready():
 	should_respawn = false
 	player_node = Global.player_node
-#	anim_player.play("walk")
+	
+	var anim_player = $AnimationPlayer
+	anim_player.play("Goblin")
+	
 	add_to_group("zombies")
 
 	navAgent = $NavigationAgent
