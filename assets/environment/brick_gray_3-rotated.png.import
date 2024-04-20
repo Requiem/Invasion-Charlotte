@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/brick_gray_3.png-674dd31e575f0cde1c3828fdc882c6c0.stex"
+path="res://.import/brick_gray_3-rotated.png-954fe9dab989511bcc723eeb2e971829.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/environment/brick_gray_3.png"
-dest_files=[ "res://.import/brick_gray_3.png-674dd31e575f0cde1c3828fdc882c6c0.stex" ]
+source_file="res://assets/environment/brick_gray_3-rotated.png"
+dest_files=[ "res://.import/brick_gray_3-rotated.png-954fe9dab989511bcc723eeb2e971829.stex" ]
 
 [params]
 
