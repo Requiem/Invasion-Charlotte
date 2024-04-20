@@ -1,7 +1,10 @@
 [gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://enemies/goblin.gd" type="Script" id=1]
+
 [ext_resource path="res://assets/enemies/goblin_animated.png" type="Texture" id=2]
+[ext_resource path="res://assets/sounds/Goblin/Goblin/soundbits_ScreamsShouts2_Monsters_Monster_Roar_Growl_159.wav" type="AudioStream" id=3]
+
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.5
@@ -77,5 +80,8 @@ one_shot = true
 [node name="DamageTimer" type="Timer" parent="."]
 wait_time = 0.15
 one_shot = true
+
+[node name="GoblinDamageSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
 
 [connection signal="timeout" from="DamageTimer" to="." method="_on_DamageTimer_timeout"]

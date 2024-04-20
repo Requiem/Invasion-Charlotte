@@ -404,12 +404,18 @@ func recieve_damage(collision_point):
 		num_health_points -= 3
 		$Sprite3D.modulate = Color8(255, 0, 0)
 		$DamageTimer.start()
+		playtakedamagesound()
+		
 		
 		if _current_state != STATES.COMBAT: #TODO: make independent of current state. timing could be off?
 			if ! is_alerted:
 				self.has_just_been_alerted = true
 #		if num_health_points >= 0:
 #			EnemySoundController.play_next_injury_sound()
+
+func playtakedamagesound():
+#		$GoblinDamageSound.pitch_scale = rand_range(0.9,1.1)
+		$GoblinDamageSound.play()
 
 
 func die():
