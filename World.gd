@@ -15,6 +15,9 @@ func _physics_process(delta):
 	
 	
 func spawn_enemies():
+	if ( ! is_instance_valid((get_tree()))): # this line is to prevent a nullpointer when the game is exited
+		return
+		
 	var spawn_point_list = get_tree().get_nodes_in_group("enemy_spawn_points") 
 	for spawn_point in spawn_point_list:
 		if spawn_point.spawning_is_enabled:
@@ -35,6 +38,9 @@ func spawn_goblin(_position):
 
 
 func enable_spawn_points():
+	if ( ! is_instance_valid((get_tree()))): # this line is to prevent a nullpointer when the game is exited
+		return
+		
 	for spawn_point in get_tree().get_nodes_in_group("enemy_spawn_points"):
 		spawn_point.spawning_is_enabled = true
 
