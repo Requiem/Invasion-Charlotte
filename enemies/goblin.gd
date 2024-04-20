@@ -19,7 +19,6 @@ const gravity = 320
 var player_node
 
 #onready var raycast = $RayCast
-#onready var anim_player = $AnimationPlayer
 
 var player = null
 var dead = false
@@ -69,7 +68,10 @@ var _enemy_position = null
 func _ready():
 	should_respawn = false
 	player_node = Global.player_node
-#	anim_player.play("walk")
+	
+	var anim_player = $AnimationPlayer
+	anim_player.play("Goblin")
+	
 	add_to_group("zombies")
 
 	navAgent = $NavigationAgent
@@ -402,12 +404,18 @@ func recieve_damage(collision_point):
 		num_health_points -= 3
 		$Sprite3D.modulate = Color8(255, 0, 0)
 		$DamageTimer.start()
+		playtakedamagesound()
+		
 		
 		if _current_state != STATES.COMBAT: #TODO: make independent of current state. timing could be off?
 			if ! is_alerted:
 				self.has_just_been_alerted = true
 #		if num_health_points >= 0:
 #			EnemySoundController.play_next_injury_sound()
+
+func playtakedamagesound():
+#		$GoblinDamageSound.pitch_scale = rand_range(0.9,1.1)
+		$GoblinDamageSound.play()
 
 
 func die():
