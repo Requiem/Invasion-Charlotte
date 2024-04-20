@@ -2,8 +2,8 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/healthPack.png-dea96b0c5dc6966654a1104b5793da27.s3tc.stex"
-path.etc2="res://.import/healthPack.png-dea96b0c5dc6966654a1104b5793da27.etc2.stex"
+path.s3tc="res://.import/assault-rifle.png-90c9a66b9c52ed1ef44a9bbff7ba5eea.s3tc.stex"
+path.etc2="res://.import/assault-rifle.png-90c9a66b9c52ed1ef44a9bbff7ba5eea.etc2.stex"
 metadata={
 "imported_formats": [ "s3tc", "etc2" ],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/healthPack.png"
-dest_files=[ "res://.import/healthPack.png-dea96b0c5dc6966654a1104b5793da27.s3tc.stex", "res://.import/healthPack.png-dea96b0c5dc6966654a1104b5793da27.etc2.stex" ]
+source_file="res://assets/weapons/assault-rifle.png"
+dest_files=[ "res://.import/assault-rifle.png-90c9a66b9c52ed1ef44a9bbff7ba5eea.s3tc.stex", "res://.import/assault-rifle.png-90c9a66b9c52ed1ef44a9bbff7ba5eea.etc2.stex" ]
 
 [params]
 
