@@ -16,8 +16,8 @@ func _ready():
 	self.has_assault_rifle = false
 	Global.player_node = self
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	yield(get_tree(), "idle_frame")
-	get_tree().call_group("zombies", "set_player", self)
+	#yield(get_tree(), "idle_frame")
+	#get_tree().call_group("zombies", "set_player", self)
 	
 
 func _input(event):
@@ -35,8 +35,9 @@ func _input(event):
 func _process(delta):
 	if Input.is_action_pressed("exit"):
 		get_tree().quit()
-	if Input.is_action_pressed("restart"):
-		die()
+	if Input.is_action_just_pressed("restart"):
+		Global.restartLevel()
+
 
 func _physics_process(delta):
 	var move_vec = Vector3()
@@ -78,6 +79,7 @@ func _physics_process(delta):
 		if raycast.is_colliding() and coll.has_method("die"):
 			raycast.get_collider().recieve_damage(raycast.get_collision_point())
 
+
 func receive_damage():
 	player_health -= 1
 	
@@ -91,6 +93,7 @@ func receive_damage():
 		$CanvasLayer/Heart2.hide()
 	elif player_health == 0:
 		die()
+		
 		
 func heal(amount):
 	player_health += amount
@@ -107,3 +110,5 @@ func heal(amount):
 
 func die():
 	get_tree().reload_current_scene()
+	Global.handle_spawning()
+

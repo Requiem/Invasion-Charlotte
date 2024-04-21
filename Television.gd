@@ -7,12 +7,17 @@ const INITIAL_TV_IMAGE_SIZE = 0.005
 const FINAL_TV_IMAGE_SIZE = 0.015
 var is_spawning = false
 
+onready var SpawningManager = get_tree().get_root().get_node("World/SpawningManager")
+
 var health_points = 10
+
+signal television_destroyed
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$shrinkGrowTimer.connect("timeout", self, "_jump_out_of_tv")
 	$shrinkGrowTimer.wait_time = TELEVISION_IMAGE_GROW_DURATION
+	var _result = self.connect("television_destroyed", SpawningManager, "_on_first_tv_destroyed")
 
 
 func _jump_out_of_tv():
@@ -20,8 +25,8 @@ func _jump_out_of_tv():
 	var goblinInstance = Goblin.instance()
 	goblinInstance.tv_spawn_node = self
 	get_tree().get_root().add_child(goblinInstance)
-	goblinInstance.starting_pos = self.get_node("whatsOnTV").global_translation
-	goblinInstance.translation = self.get_node("whatsOnTV").global_translation
+	goblinInstance.starting_pos = self.get_node("EnemySpawnPosition").global_translation
+	goblinInstance.translation = self.get_node("EnemySpawnPosition").global_translation
 	goblinInstance.should_respawn = true
 	$Tween.stop_all()
 
@@ -33,6 +38,7 @@ func recieve_damage(collision_point):
 
 
 func die():
+	emit_signal("television_destroyed")
 	queue_free()
 
 

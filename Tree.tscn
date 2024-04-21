@@ -1,9 +1,0 @@
-[gd_scene load_steps=2 format=2]
-
-[ext_resource path="res://assets/environment/tree_2_green.png" type="Texture" id=1]
-
-[node name="Tree" type="Sprite3D" groups=["environment_objects"]]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.94554, -0.0556774, -4.72563 )
-offset = Vector2( 0, 20 )
-pixel_size = 0.1
-texture = ExtResource( 1 )
