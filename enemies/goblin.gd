@@ -136,6 +136,10 @@ func _update_state_machine():
 
 
 func _process(_delta):
+	if ( ! is_instance_valid(player_node)):
+		queue_free()
+		return
+		
 	var _result = navAgent.get_next_location()
 	_update_state_machine()
 	_run_state_exit_events()
@@ -166,6 +170,10 @@ func stop_attacking():
 
 
 func _melee_attack():
+	if ( ! is_instance_valid(player_node)):
+		queue_free()
+		return
+		
 	player_node.receive_damage()
 	print("debug Melee attacked ")
 	pass
@@ -222,6 +230,10 @@ func _start_attacking():
 
 
 func track_target():
+	if ( ! is_instance_valid(player_node)):
+		queue_free()
+		return
+		
 	self._enemy_position = player_node.global_translation
 	navAgent.set_target_location(self._enemy_position)
 
@@ -358,6 +370,10 @@ func _add_next_waypoint_to_nav():
 
 
 func _physics_process(delta):
+	if ( ! is_instance_valid(player_node)):
+		queue_free()
+		return
+		
 	var vec_to_player = player_node.translation - translation
 #	vec_to_player = vec_to_player.normalized()
 #	self.look_at(player_node.translation, Vector3.UP)

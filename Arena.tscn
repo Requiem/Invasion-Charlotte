@@ -56,4 +56,49 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.02561, 0, 0 )
 [node name="SpawnPointForTree5" parent="." instance=ExtResource( 5 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.026, 0, -7 )
 
+[node name="SpawnPointForTree6" parent="." instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.026, 0, -12 )
+
+[node name="SpawnPointForTree7" parent="." instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.976, 0, -7 )
+
+[node name="SpawnPointForTree8" parent="." instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.026, 0, -16 )
+
+[node name="SpawnPointForTree9" parent="." instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.976, 0, 3 )
+
+[node name="SpawnPointForTree10" parent="." instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.976, 0, -12 )
+
+[node name="SpawnPointForTree11" parent="." instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.976, 0, 12 )
+
+[node name="SpawnPointForTree12" parent="." instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.972, 0, 15 )
+
+[node name="SpawnPointForTree13" parent="." instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.041, 0, 10 )
+
+[node name="SpawnPointForTree14" parent="." instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14.041, 0, -9 )
+
+[node name="SpawnPointForTree15" parent="." instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.041, 0, 2 )
+
+[node name="SpawnPointForTree16" parent="." instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.041, 0, 7 )
+
+[node name="SpawnPointForTree17" parent="." instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.976, 0, -14 )
+
+[node name="SpawnPointForTree18" parent="." instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10.976, 0, 5 )
+
+[node name="SpawnPointForTree19" parent="." instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10.976, 0, -3 )
+
+[node name="SpawnPointForTree20" parent="." instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.041, 0, -16 )
+
 [connection signal="body_entered" from="HealthPack" to="HealthPack" method="_on_HealthPack_body_entered"]

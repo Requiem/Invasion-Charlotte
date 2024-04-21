@@ -109,6 +109,7 @@ func heal(amount):
 		player_health = 5
 
 func die():
+	Global.player_node = null
 	get_tree().reload_current_scene()
-	Global.handle_spawning()
+	queue_free()
 
