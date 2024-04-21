@@ -1,7 +1,7 @@
 
 extends Node
 
-var NUMBER_OF_SPAWN_POINTS_TO_ENABLE = 1
+var NUMBER_OF_SPAWN_POINTS_TO_ENABLE = 13
 
 var Goblin = load("res://enemies/Goblin.tscn")
 var SpawnTree = load("res://SpawnTree.tscn")
