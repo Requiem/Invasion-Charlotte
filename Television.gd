@@ -25,8 +25,8 @@ func _jump_out_of_tv():
 	var goblinInstance = Goblin.instance()
 	goblinInstance.tv_spawn_node = self
 	get_tree().get_root().add_child(goblinInstance)
-	goblinInstance.starting_pos = self.get_node("EnemySpawnPosition").global_translation
-	goblinInstance.translation = self.get_node("EnemySpawnPosition").global_translation
+	goblinInstance.starting_pos = self.get_node("whatsOnTV").global_translation
+	goblinInstance.translation = self.get_node("whatsOnTV").global_translation
 	goblinInstance.should_respawn = true
 	$Tween.stop_all()
 

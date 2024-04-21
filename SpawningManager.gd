@@ -1,6 +1,8 @@
 
 extends Node
 
+var NUMBER_OF_SPAWN_POINTS_TO_ENABLE = 3
+
 var Goblin = load("res://enemies/Goblin.tscn")
 var SpawnTree = load("res://SpawnTree.tscn")
 onready var enemy_spawn_point_list = get_tree().get_nodes_in_group("enemy_spawn_points") 
@@ -49,7 +51,7 @@ func spawn_goblin(_position):
 
 
 func enable_tree_spawn_points():
-	var indexes_to_spawn_trees = pickRandomIndexes(tree_spawn_point_list, 1)
+	var indexes_to_spawn_trees = pickRandomIndexes(tree_spawn_point_list, NUMBER_OF_SPAWN_POINTS_TO_ENABLE)
 	print("debug inside enable_tree_spawn_points")
 	for spawn_point_index in indexes_to_spawn_trees:
 		tree_spawn_point_list[spawn_point_index].spawning_is_enabled = true
