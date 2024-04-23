@@ -48,6 +48,7 @@ func spawn_goblin(_position):
 	goblinInstance.translation = _position
 	call_deferred("add_child", goblinInstance)
 	goblinInstance.should_respawn = true
+	goblinInstance.add_to_group("enemies")
 
 
 func enable_tree_spawn_points():

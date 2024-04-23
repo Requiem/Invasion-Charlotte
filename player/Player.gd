@@ -19,6 +19,17 @@ func _ready():
 	#yield(get_tree(), "idle_frame")
 	#get_tree().call_group("zombies", "set_player", self)
 	
+	
+func on_enemy_died():
+	var enemies_list = get_tree().get_nodes_in_group("enemies") 
+	if (enemies_list.size() == 1):
+		print("debug, all enemies eliminated")
+		_flash_instructions_for_reset()
+		
+		
+func _flash_instructions_for_reset():
+	$HUDInstructionText.show()
+	
 
 func _input(event):
 	if event is InputEventMouseMotion:
@@ -110,6 +121,7 @@ func heal(amount):
 
 func die():
 	Global.player_node = null
+	$ResetInstructionText.hide() #TODO: does this need to be here?
 	get_tree().reload_current_scene()
 	queue_free()
 

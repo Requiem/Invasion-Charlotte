@@ -18,6 +18,8 @@ const gravity = 320
 
 var player_node
 
+signal enemy_died
+
 #onready var raycast = $RayCast
 
 var player = null
@@ -85,7 +87,9 @@ func _ready():
 
 
 	_register_listener_for_player_gun_sounds()
-	
+	self.connect("enemy_died", player_node, "on_enemy_died")
+
+		
 
 func _update_state_machine():
 	_previous_state = _current_state
@@ -439,6 +443,7 @@ func die():
 	$CollisionShape.disabled = true
 #	anim_player.play("die")
 	$ObliterationTimer.disconnect("timeout", self, "_fade_away")
+	emit_signal("enemy_died")
 	
 	if (tv_spawn_node != null and ! is_instance_valid(tv_spawn_node)):
 		queue_free()
