@@ -12,7 +12,7 @@ export var RATE_OF_FIRE_SECONDS_PER_SHOT = 0.3
 const HEIGHT_OF_PLAYER = Vector3(0, 1.5, 0) #TODO: is this correct?
 const STARTING_HEALTH_POINTS = 3
 const SMELLING_DISTANCE = 20
-const MELEE_RANGE = 3
+const MELEE_RANGE = 1
 
 const gravity = 320
 
