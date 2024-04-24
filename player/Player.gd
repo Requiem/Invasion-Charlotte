@@ -122,8 +122,8 @@ func heal(amount):
 		player_health = 5
 
 func die():
+	$HUDInstructionText.hide() #TODO: does this need to be here?
 	Global.player_node = null
-	$ResetInstructionText.hide() #TODO: does this need to be here?
 	get_tree().reload_current_scene()
 	queue_free()
 

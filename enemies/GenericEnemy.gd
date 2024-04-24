@@ -1,8 +1,7 @@
 
-
 extends KinematicBody
 
-const MOVE_SPEED = 2
+var move_speed = 2
 export var ACCELERATION_RATE = 0.1
 export var RATE_OF_FIRE_SECONDS_PER_SHOT = 0.3
 const HEIGHT_OF_PLAYER = Vector3(0, 1.5, 0) #TODO: is this correct?
@@ -23,8 +22,8 @@ signal enemy_died
 var player = null
 var dead = false
 var starting_pos
-var tv_spawn_node
 var should_respawn
+var is_flyer
 
 ###  AI code
 var navAgent : NavigationAgent
@@ -69,8 +68,8 @@ func _ready():
 	should_respawn = false
 	player_node = Global.player_node
 	
-	var anim_player = $AnimationPlayer
-	anim_player.play("Goblin")
+	#var anim_player = $AnimationPlayer
+	#anim_player.play("Goblin")
 	
 	add_to_group("zombies")
 
@@ -291,11 +290,11 @@ func _move_toward_position(target_pos):
 	var vec_to_player = player_node.translation
 	
 	var direction = global_transform.origin.direction_to(vec_to_player)
-	var final_velocity = direction * MOVE_SPEED
+	var final_velocity = direction * move_speed
 	
 	#vec_to_player = vec_to_player.normalized()
 	self.look_at(player_node.translation, Vector3.UP)
-	move_and_slide(final_velocity * MOVE_SPEED)	
+	move_and_slide(final_velocity * move_speed)	
 	
 
 func attack():
@@ -390,7 +389,7 @@ func _physics_process(delta):
 	
 #	move_and_collide(vec_to_player * MOVE_SPEED * delta)
 
-	if not self.is_in_group("flyers"):
+	if not is_flyer:
 		var move_vec = Vector3()
 		move_vec.y -= gravity * delta
 		move_vec = move_and_slide(move_vec, Vector3.UP)
@@ -432,36 +431,24 @@ func recieve_damage(collision_point):
 #			EnemySoundController.play_next_injury_sound()
 
 func playtakedamagesound():
-		play_random_goblin_death_noise()
+	pass
 
 
-func play_random_goblin_death_noise():
-	randomize()
-	var randomIndex = (randi() % NUM_DEATH_SOUNDS) + 1
-	get_node("GoblinDamageSound" + str(randomIndex)).play()
+func die():
+	dead = true
+	$CollisionShape.disabled = true
+#	anim_player.play("die")
+	$ObliterationTimer.disconnect("timeout", self, "_fade_away")
+	emit_signal("enemy_died")
 
-
+	respawn_or_disappear()
+	
+	
+# the death and respawn of enemies needs to be handled in the subclass	
 func respawn_or_disappear():
-	if (tv_spawn_node != null and ! is_instance_valid(tv_spawn_node)):
-		queue_free()
-	elif ( ! should_respawn):
-		queue_free()
-	else:
-		respawn()
+	pass
 
 
-func respawn():	
-	if (tv_spawn_node != null and is_instance_valid(tv_spawn_node)):
-		tv_spawn_node.spawn()
-		queue_free()
-	else:		
-		$CollisionShape.disabled = false
-		translation = starting_pos
-		dead = false
-
-		_current_state = STATES.INIT
-		num_health_points = STARTING_HEALTH_POINTS
-		_register_listener_for_player_gun_sounds()
 		
 
 

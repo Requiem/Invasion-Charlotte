@@ -1,97 +1,23 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://enemies/goblin.gd" type="Script" id=1]
-[ext_resource path="res://assets/enemies/goblin_animated.png" type="Texture" id=2]
-[ext_resource path="res://assets/sounds/Goblin/Goblin/soundbits_ScreamsShouts2_Monsters_Monster_Roar_Growl_159.wav" type="AudioStream" id=3]
+[ext_resource path="res://Goblin.gd" type="Script" id=1]
+[ext_resource path="res://assets/sounds/Goblin/Goblin/soundbits_ScreamsShouts2_Monsters_Monster_Roar_Growl_159.mp3" type="AudioStream" id=2]
+[ext_resource path="res://enemies/GenericEnemy.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/sounds/Goblin/Goblin/little_robot_sound_factory_fantasy_Goblin_01.mp3" type="AudioStream" id=4]
 [ext_resource path="res://assets/sounds/Goblin/Goblin/little_robot_sound_factory_fantasy_Goblin_04.mp3" type="AudioStream" id=5]
 [ext_resource path="res://assets/sounds/Goblin/Goblin/little_robot_sound_factory_fantasy_Goblin_03.mp3" type="AudioStream" id=6]
 
-[sub_resource type="CapsuleShape" id=1]
-radius = 0.5
-height = 0.5
-
-[sub_resource type="ConvexPolygonShape" id=2]
-points = PoolVector3Array( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 )
-
-[sub_resource type="Animation" id=3]
-resource_name = "Goblin"
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0.1, 0.5 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ 0, 1 ]
-}
-
-[node name="Goblin" type="KinematicBody"]
+[node name="Goblin" instance=ExtResource( 3 )]
 script = ExtResource( 1 )
 
-[node name="CollisionShape" type="CollisionShape" parent="."]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.75, -0.008 )
-shape = SubResource( 1 )
-
-[node name="Sprite3D" type="Sprite3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0 )
-pixel_size = 0.05
-texture = ExtResource( 2 )
-hframes = 2
-frame = 1
-
-[node name="RayCast" type="RayCast" parent="."]
-
-[node name="NavigationAgent" type="NavigationAgent" parent="."]
-
-[node name="VisionRaycast" type="RayCast" parent="."]
-enabled = true
-cast_to = Vector3( 0, 2, -32 )
-collision_mask = 3
-debug_shape_custom_color = Color( 0.690196, 0, 0, 1 )
-
-[node name="VisionArea" type="Area" parent="."]
-
-[node name="CollisionShape" type="CollisionShape" parent="VisionArea"]
-transform = Transform( 3, 0, 0, 0, -3.93403e-07, -1, 0, 9, -4.37114e-08, 0, 0.5, -9.25 )
-shape = SubResource( 2 )
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-root_node = NodePath("../Sprite3D")
-anims/Goblin = SubResource( 3 )
-
-[node name="CombatReactionTimer" type="Timer" parent="."]
-wait_time = 0.25
-one_shot = true
-
-[node name="TargetTrackerTimer" type="Timer" parent="."]
-
-[node name="AttackTimer" type="Timer" parent="."]
-wait_time = 0.3
-autostart = true
-
-[node name="ObliterationTimer" type="Timer" parent="."]
-wait_time = 0.25
-one_shot = true
-
-[node name="DamageTimer" type="Timer" parent="."]
-wait_time = 0.15
-one_shot = true
-
-[node name="GoblinDamageSound1" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 3 )
-
-[node name="GoblinDamageSound2" type="AudioStreamPlayer" parent="."]
+[node name="GoblinDamageSound1" type="AudioStreamPlayer" parent="." index="12"]
 stream = ExtResource( 4 )
 
-[node name="GoblinDamageSound3" type="AudioStreamPlayer" parent="."]
+[node name="GoblinDamageSound2" type="AudioStreamPlayer" parent="." index="13"]
+stream = ExtResource( 2 )
+
+[node name="GoblinDamageSound3" type="AudioStreamPlayer" parent="." index="14"]
 stream = ExtResource( 6 )
 
-[node name="GoblinDamageSound4" type="AudioStreamPlayer" parent="."]
+[node name="GoblinDamageSound4" type="AudioStreamPlayer" parent="." index="15"]
 stream = ExtResource( 5 )
-
-[connection signal="timeout" from="DamageTimer" to="." method="_on_DamageTimer_timeout"]
