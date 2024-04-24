@@ -65,6 +65,7 @@ func pickRandomIndexes(list: Array, N: int) -> Array:
 	# Ensure N does not exceed the size of the list
 	N = min(N, listSize)
 
+
 	# Pick random indexes
 	while randomIndexes.size() < N:
 		randomize()

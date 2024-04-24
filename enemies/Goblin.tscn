@@ -1,8 +1,11 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://enemies/goblin.gd" type="Script" id=1]
 [ext_resource path="res://assets/enemies/goblin_animated.png" type="Texture" id=2]
 [ext_resource path="res://assets/sounds/Goblin/Goblin/soundbits_ScreamsShouts2_Monsters_Monster_Roar_Growl_159.wav" type="AudioStream" id=3]
+[ext_resource path="res://assets/sounds/Goblin/Goblin/little_robot_sound_factory_fantasy_Goblin_01.mp3" type="AudioStream" id=4]
+[ext_resource path="res://assets/sounds/Goblin/Goblin/little_robot_sound_factory_fantasy_Goblin_04.mp3" type="AudioStream" id=5]
+[ext_resource path="res://assets/sounds/Goblin/Goblin/little_robot_sound_factory_fantasy_Goblin_03.mp3" type="AudioStream" id=6]
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.5
@@ -79,7 +82,16 @@ one_shot = true
 wait_time = 0.15
 one_shot = true
 
-[node name="GoblinDamageSound" type="AudioStreamPlayer" parent="."]
+[node name="GoblinDamageSound1" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
+
+[node name="GoblinDamageSound2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+
+[node name="GoblinDamageSound3" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+
+[node name="GoblinDamageSound4" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
 
 [connection signal="timeout" from="DamageTimer" to="." method="_on_DamageTimer_timeout"]

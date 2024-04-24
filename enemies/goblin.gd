@@ -14,6 +14,8 @@ const STARTING_HEALTH_POINTS = 3
 const SMELLING_DISTANCE = 20
 const MELEE_RANGE = 1
 
+const NUM_DEATH_SOUNDS = 4
+
 const gravity = 320
 
 var player_node
@@ -434,8 +436,13 @@ func recieve_damage(collision_point):
 #			EnemySoundController.play_next_injury_sound()
 
 func playtakedamagesound():
-#		$GoblinDamageSound.pitch_scale = rand_range(0.9,1.1)
-		$GoblinDamageSound.play()
+		play_random_goblin_death_noise()
+
+
+func play_random_goblin_death_noise():
+	randomize()
+	var randomIndex = (randi() % NUM_DEATH_SOUNDS) + 1
+	get_node("GoblinDamageSound" + str(randomIndex)).play()
 
 
 func die():
