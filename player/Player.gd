@@ -77,7 +77,7 @@ func _physics_process(delta):
 
 			var coll = raycast.get_collider()
 			if raycast.is_colliding() and coll.has_method("die"):
-				raycast.get_collider().recieve_damage(raycast.get_collision_point())
+				raycast.get_collider().recieve_damage()
 		else:
 			anim_player.play("idle")
 			$CanvasLayer/Control/FireWand.set_offset(Vector2(0,0))
@@ -92,7 +92,7 @@ func _physics_process(delta):
 
 		var coll = raycast.get_collider()
 		if raycast.is_colliding() and coll.has_method("die"):
-			raycast.get_collider().recieve_damage(raycast.get_collision_point())
+			raycast.get_collider().recieve_damage()
 
 
 	if Input.is_action_just_pressed("swapWeapon"):
