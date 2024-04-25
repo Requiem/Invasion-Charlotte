@@ -154,7 +154,6 @@ func stop_attacking():
 func _melee_attack():
 	player_node.receive_damage()
 	print("debug Melee attacked ")
-	pass
 
 
 func _run_state_enter_events():	
