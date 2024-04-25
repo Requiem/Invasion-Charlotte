@@ -1,6 +1,6 @@
 extends Node
 
-var Goblin = load("res://enemies/Goblin.tscn")
+var Goblin = load("res://enemies/npcs/Goblin.tscn")
 var GoblinSprite = load("res://assets/enemies/goblin1.png")
 const TELEVISION_IMAGE_GROW_DURATION = 2
 const INITIAL_TV_IMAGE_SIZE = 0.005

@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://assets/enemies/centaurArcher.png" type="Texture" id=1]
-[ext_resource path="res://enemies/Goblin.tscn" type="PackedScene" id=2]
-[ext_resource path="res://enemies/CentaurArcher.gd" type="Script" id=3]
+[ext_resource path="res://enemies/npcs/Goblin.tscn" type="PackedScene" id=2]
+[ext_resource path="res://enemies/npcs/CentaurArcher.gd" type="Script" id=3]
 
 
 [node name="CentaurArcher" instance=ExtResource( 2 )]

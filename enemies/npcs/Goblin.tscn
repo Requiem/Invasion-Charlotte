@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://enemies/Goblin.gd" type="Script" id=1]
+[ext_resource path="res://enemies/npcs/Goblin.gd" type="Script" id=1]
 [ext_resource path="res://assets/sounds/Goblin/Goblin/soundbits_ScreamsShouts2_Monsters_Monster_Roar_Growl_159.mp3" type="AudioStream" id=2]
-[ext_resource path="res://enemies/GenericEnemy.tscn" type="PackedScene" id=3]
+[ext_resource path="res://enemies/npcs/GenericEnemy.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/sounds/Goblin/Goblin/little_robot_sound_factory_fantasy_Goblin_01.mp3" type="AudioStream" id=4]
 [ext_resource path="res://assets/sounds/Goblin/Goblin/little_robot_sound_factory_fantasy_Goblin_04.mp3" type="AudioStream" id=5]
 [ext_resource path="res://assets/sounds/Goblin/Goblin/little_robot_sound_factory_fantasy_Goblin_03.mp3" type="AudioStream" id=6]

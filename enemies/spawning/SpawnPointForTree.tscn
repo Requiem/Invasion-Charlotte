@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://enemies/SpawnPointForTree.gd" type="Script" id=1]
+[ext_resource path="res://enemies/spawning/SpawnPointForTree.gd" type="Script" id=1]
 
 [node name="SpawnPointForTree" type="Position3D" groups=["spawn_spawn_points"]]
 script = ExtResource( 1 )

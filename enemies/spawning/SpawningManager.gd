@@ -2,10 +2,11 @@
 extends Node
 
 const NUMBER_OF_SPAWN_POINTS_TO_ENABLE = 13
-const TOTAL_NUMBER_OF_WAVES = 1
+const TOTAL_NUMBER_OF_WAVES = 2
 
-var Goblin = load("res://enemies/Goblin.tscn")
-var SpawnTree = load("res://enemies/SpawnTree.tscn")
+var Goblin = load("res://enemies/npcs/Goblin.tscn")
+var Hornet = load("res://enemies/npcs/Hornet.tscn")
+var SpawnTree = load("res://enemies/spawning/SpawnTree.tscn")
 #onready var enemy_spawn_point_list = get_tree().get_nodes_in_group("enemy_spawn_points") 
 onready var tree_spawn_point_list = get_tree().get_nodes_in_group("spawn_spawn_points") 
 var current_wave_num
@@ -36,9 +37,10 @@ func _physics_process(_delta):
 	
 func on_enemy_died():
 	var enemies_list = get_tree().get_nodes_in_group("enemies") 
+	print("debug, enemies_list_size: " + str(enemies_list.size()))
 	if (enemies_list.size() == 1):
 		print("debug, all enemies eliminated, starting next wave")
-		if (current_wave_num == TOTAL_NUMBER_OF_WAVES-1):
+		if (current_wave_num == TOTAL_NUMBER_OF_WAVES):
 			on_all_waves_finished()
 		else:
 			start_next_wave()
@@ -71,8 +73,22 @@ func spawn_tree(_position):
 func spawn_enemies(_enemy_spawn_point_list):
 	for spawn_point in _enemy_spawn_point_list:
 		if spawn_point.spawning_is_enabled:
-			print(str(spawn_point.global_translation))
-			spawn_goblin(spawn_point.global_translation)
+			if (current_wave_num == 1):
+				print("debug, wave 1 enemy spawning at " + str(spawn_point.global_translation))
+				spawn_goblin(spawn_point.global_translation)
+			elif (current_wave_num == 2):
+				print("debug, wave 2 enemy spawning at " + str(spawn_point.global_translation))
+				spawn_hornet(spawn_point.global_translation)
+
+
+func spawn_hornet(_position):
+	var hornetInstance = Hornet.instance()
+	hornetInstance.starting_pos = _position
+	hornetInstance.translation = _position
+	call_deferred("add_child", hornetInstance)
+	hornetInstance.should_respawn = true #TODO: should not respawn, right
+	hornetInstance.add_to_group("enemies")
+	hornetInstance.connect("enemy_died", self, "on_enemy_died")
 	
 
 func spawn_goblin(_position):
@@ -121,7 +137,4 @@ func _on_first_tv_destroyed():
 
 
 func enable_first_wave():
-	var _enemy_spawn_point_list = get_tree().get_nodes_in_group("enemy_spawn_points") 
-	enable_spawn_points(_enemy_spawn_point_list)
-	spawn_enemies(_enemy_spawn_point_list)
-
+	start_next_wave()

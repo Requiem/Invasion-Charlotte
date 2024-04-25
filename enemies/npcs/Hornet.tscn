@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://enemies/Hornet.gd" type="Script" id=1]
+[ext_resource path="res://enemies/npcs/Hornet.gd" type="Script" id=1]
 [ext_resource path="res://assets/enemies/hornet.png" type="Texture" id=2]
-[ext_resource path="res://enemies/GenericEnemy.tscn" type="PackedScene" id=3]
+[ext_resource path="res://enemies/npcs/GenericEnemy.tscn" type="PackedScene" id=3]
 
 [node name="Hornet" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
