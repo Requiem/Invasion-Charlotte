@@ -21,15 +21,8 @@ func _ready():
 	if (not  MusicController.get_node("Music").playing):
 		MusicController.play_music()
 	
-	
-func on_enemy_died():
-	var enemies_list = get_tree().get_nodes_in_group("enemies") 
-	if (enemies_list.size() == 1):
-		print("debug, all enemies eliminated")
-		_flash_instructions_for_reset()
 		
-		
-func _flash_instructions_for_reset():
+func flash_instructions_for_reset():
 	$HUDInstructionText.show()
 	
 

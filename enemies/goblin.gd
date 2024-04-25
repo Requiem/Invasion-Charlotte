@@ -60,35 +60,6 @@ var _enemy_position = null
 
 
 
-
-
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	should_respawn = false
-	player_node = Global.player_node
-	
-	var anim_player = $AnimationPlayer
-	anim_player.play("Goblin")
-	
-	add_to_group("zombies")
-
-	navAgent = $NavigationAgent
-	if waypoint_graph and waypoint_graph.waypoint_list.size() > 0: 
-		_add_next_waypoint_to_nav()
-
-	
-	_current_state = STATES.INIT
-	num_health_points = STARTING_HEALTH_POINTS 
-	_update_state_machine()
-
-
-	_register_listener_for_player_gun_sounds()
-	self.connect("enemy_died", player_node, "on_enemy_died")
-
-		
-
 func _update_state_machine():
 	_previous_state = _current_state
 	

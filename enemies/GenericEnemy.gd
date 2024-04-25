@@ -84,7 +84,6 @@ func _ready():
 
 
 	_register_listener_for_player_gun_sounds()
-	self.connect("enemy_died", player_node, "on_enemy_died")
 
 		
 

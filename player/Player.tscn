@@ -127,7 +127,8 @@ stream = ExtResource( 5 )
 visible = false
 margin_left = 204.0
 margin_top = 91.0
-margin_right = 782.0
-margin_bottom = 199.0
+margin_right = 854.0
+margin_bottom = 254.0
 theme = SubResource( 5 )
-text = "Press \"R\" to do it again."
+text = "~ ALL ENEMIES DEFEATED ~
+    Press \"R\" to do it again."
