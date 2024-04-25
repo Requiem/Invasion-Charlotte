@@ -38,7 +38,7 @@ func _input(event):
 			rotation_degrees.x = -89
 
 
-func _process(delta):
+func _process(_delta):
 	if Input.is_action_pressed("exit"):
 		get_tree().quit()
 	if Input.is_action_just_pressed("restart"):
@@ -57,7 +57,7 @@ func _physics_process(delta):
 		move_vec.x += 1
 	move_vec = move_vec.normalized()
 	move_vec = move_vec.rotated(Vector3(0, 1, 0), rotation.y)
-	move_and_collide(move_vec * MOVE_SPEED * delta)
+	var _result = move_and_collide(move_vec * MOVE_SPEED * delta)
 
 	move_vec.y -= gravity * delta
 	move_vec = move_and_slide(move_vec, Vector3.UP)
@@ -72,7 +72,7 @@ func _physics_process(delta):
 		
 		var coll = raycast.get_collider()
 		if raycast.is_colliding() and coll.has_method("die"):
-			raycast.get_collider().recieve_damage(raycast.get_collision_point())
+			raycast.get_collider().recieve_damage()
 	elif Input.is_action_pressed("shoot") and !anim_player.is_playing():
 		anim_player.play("shoot")
 		
@@ -83,7 +83,7 @@ func _physics_process(delta):
 		
 		var coll = raycast.get_collider()
 		if raycast.is_colliding() and coll.has_method("die"):
-			raycast.get_collider().recieve_damage(raycast.get_collision_point())
+			raycast.get_collider().recieve_damage()
 
 
 func receive_damage():
@@ -117,6 +117,6 @@ func heal(amount):
 func die():
 	$HUDInstructionText.hide() #TODO: does this need to be here?
 	Global.player_node = null
-	get_tree().reload_current_scene()
+	var _result = get_tree().reload_current_scene()
 	queue_free()
 

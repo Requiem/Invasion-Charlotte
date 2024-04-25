@@ -15,9 +15,9 @@ signal television_destroyed
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	$shrinkGrowTimer.connect("timeout", self, "_jump_out_of_tv")
+	var _result = $shrinkGrowTimer.connect("timeout", self, "_jump_out_of_tv")
 	$shrinkGrowTimer.wait_time = TELEVISION_IMAGE_GROW_DURATION
-	var _result = self.connect("television_destroyed", SpawningManager, "_on_first_tv_destroyed")
+	_result = self.connect("television_destroyed", SpawningManager, "_on_first_tv_destroyed")
 
 
 func _jump_out_of_tv():
@@ -31,7 +31,7 @@ func _jump_out_of_tv():
 	$Tween.stop_all()
 
 
-func recieve_damage(collision_point):
+func recieve_damage():
 		health_points -= 4
 		if (health_points <= 0):
 			die()

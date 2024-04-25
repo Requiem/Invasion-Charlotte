@@ -380,7 +380,7 @@ func _fade_away():
 	queue_free()
 
 
-func recieve_damage(collision_point):
+func recieve_damage():
 	if _current_state != STATES.DECEASED:
 		#if _is_headshot(collision_point):
 		#	num_health_points = 0

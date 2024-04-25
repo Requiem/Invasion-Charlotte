@@ -160,7 +160,7 @@ func _un_alert_the_npc():
 
 func _exit_combat():
 	stop_attacking()
-	var _disconnect_result = $CombatReactionTimer.disconnect("timeout", self, "_start_attacking")
+	$CombatReactionTimer.disconnect("timeout", self, "_start_attacking")
 	$TargetTrackerTimer.disconnect("timeout", self, "track_target")
 
 
@@ -192,7 +192,7 @@ func _run_state_enter_events():
 		#EnemySoundController.play_next_death_sound()
 		_remove_npc_from_player_collisions()
 		#spawn_ammo()
-		$ObliterationTimer.connect("timeout", self, "_fade_away")
+		var _result = $ObliterationTimer.connect("timeout", self, "_fade_away")
 		$ObliterationTimer.start()
 
 
@@ -276,7 +276,7 @@ func _is_within_attack_range():
 	return distance_to_enemy < MELEE_RANGE
 
 
-func _move_toward_position(target_pos):
+func _move_toward_position(_target_pos):
 #	var direction = global_transform.origin.direction_to(target_pos)
 #	var final_velocity = direction * MOVE_SPEED
 #	self.actual_velocity.x = lerp(self.actual_velocity.x, final_velocity.x, ACCELERATION_RATE)
@@ -293,7 +293,7 @@ func _move_toward_position(target_pos):
 	
 	#vec_to_player = vec_to_player.normalized()
 	self.look_at(player_node.translation, Vector3.UP)
-	move_and_slide(final_velocity * move_speed)	
+	var _result = move_and_slide(final_velocity * move_speed)	
 	
 
 func attack():
@@ -351,7 +351,7 @@ func _move_toward_waypoint(target_pos):
 	_move_toward_position(target_pos)
 
 
-func turn_towards_target(target_pos):
+func turn_towards_target(_target_pos):
 	self.look_at(player_node.translation, Vector3.UP)
 
 
@@ -369,12 +369,12 @@ func _add_next_waypoint_to_nav():
 		waypoint_index = 0
 
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if ( ! is_instance_valid(player_node)):
 		queue_free()
 		return
 		
-	var vec_to_player = player_node.translation - translation
+#	var vec_to_player = player_node.translation - translation
 #	vec_to_player = vec_to_player.normalized()
 #	self.look_at(player_node.translation, Vector3.UP)
 	$Sprite3D.look_at(player_node.translation, Vector3.UP)
@@ -390,7 +390,7 @@ func _physics_process(delta):
 
 	if not is_flyer:
 		var move_vec = Vector3()
-		move_vec.y -= gravity * delta
+		move_vec.y -= gravity * _delta
 		move_vec = move_and_slide(move_vec, Vector3.UP)
 
 	if dead:
@@ -410,7 +410,7 @@ func _fade_away():
 	die()
 
 
-func recieve_damage(collision_point):
+func recieve_damage():
 	if _current_state != STATES.DECEASED:
 		#if _is_headshot(collision_point):
 		#	num_health_points = 0

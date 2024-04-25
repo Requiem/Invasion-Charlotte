@@ -23,7 +23,7 @@ func _setup_arena():
 	spawn_enemies(enemy_spawn_point_list)
 	
 	
-func _physics_process(delta):
+func _physics_process(_delta):
 	for object in get_tree().get_nodes_in_group("environment_objects"):
 		var temp = Global.player_node.global_translation
 		temp.y = 0

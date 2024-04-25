@@ -26,7 +26,7 @@ func _physics_process(_delta):
 			$MainTitleInstructionText.hide()
 			$StoryText.show()
 		elif (story_text_index == STORY_TEXT_LIST.size() - 1):
-			get_tree().change_scene("res://Arena.tscn")
+			var _result = get_tree().change_scene("res://Arena.tscn")
 		else:
 			story_text_index += 1
 			$StoryText.text = STORY_TEXT_LIST[story_text_index]
