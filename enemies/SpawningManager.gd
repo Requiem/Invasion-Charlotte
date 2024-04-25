@@ -5,7 +5,7 @@ const NUMBER_OF_SPAWN_POINTS_TO_ENABLE = 13
 const TOTAL_NUMBER_OF_WAVES = 1
 
 var Goblin = load("res://enemies/Goblin.tscn")
-var SpawnTree = load("res://SpawnTree.tscn")
+var SpawnTree = load("res://enemies/SpawnTree.tscn")
 #onready var enemy_spawn_point_list = get_tree().get_nodes_in_group("enemy_spawn_points") 
 onready var tree_spawn_point_list = get_tree().get_nodes_in_group("spawn_spawn_points") 
 var current_wave_num
