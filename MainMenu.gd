@@ -1,5 +1,6 @@
 extends Control
 
+var at_title_screen
 
 const STORY_TEXT_LIST = ["In the heart of Gastonia, one of North Carolina's most prosperous and cultured towns, something strange is happening.",
 	"Across town, retro game monsters are spilling out of CRT televisions in a torrent of 8-bit chaos, wreaking havoc in their wake.",
@@ -10,14 +11,21 @@ var story_text_index
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	story_text_index = 1
+	at_title_screen = true
+	story_text_index = 0
 	$StoryText.text = STORY_TEXT_LIST[0]
 	$StoryText.text += " Press the Space Bar to Go......."
 
 
 func _physics_process(_delta):
 	if Input.is_action_just_pressed("ui_accept"):
-		if (story_text_index == STORY_TEXT_LIST.size() - 1):
+		if (at_title_screen):
+			story_text_index += 1
+			at_title_screen = false
+			$MainTitle.hide()
+			$MainTitleInstructionText.hide()
+			$StoryText.show()
+		elif (story_text_index == STORY_TEXT_LIST.size() - 1):
 			get_tree().change_scene("res://Arena.tscn")
 		else:
 			story_text_index += 1
