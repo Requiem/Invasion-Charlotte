@@ -8,29 +8,31 @@ onready var anim_player = $AnimationPlayer
 onready var raycast = $RayCast
 
 onready var player_health = 5
-var has_assault_rifle
+var equipped_weapon
+var weapons = []
 
 signal gun_fired
 
 func _ready():
-	self.has_assault_rifle = false
+	self.equipped_weapon = "crossbow"
+	self.weapons.append("crossbow")
 	Global.player_node = self
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	#yield(get_tree(), "idle_frame")
 	#get_tree().call_group("zombies", "set_player", self)
 	if (not  MusicController.get_node("Music").playing):
 		MusicController.play_music()
-	
-		
+
+
 func flash_instructions_for_reset():
 	$HUDInstructionText.show()
-	
+
 
 func _input(event):
 	if event is InputEventMouseMotion:
 		rotation_degrees.y -= MOUSE_SENS * event.relative.x
 		rotation_degrees.x -= MOUSE_SENS * event.relative.y
-		
+
 		# clip the vertical axis viewing so camera can't flip around vertically
 		if rotation_degrees.x > 89:
 			rotation_degrees.x = 89
@@ -61,34 +63,61 @@ func _physics_process(delta):
 
 	move_vec.y -= gravity * delta
 	move_vec = move_and_slide(move_vec, Vector3.UP)
-	
-	if Input.is_action_pressed("shoot") and self.has_assault_rifle == true:
-		anim_player.play("shoot")
-		
-		emit_signal("gun_fired")
-		
-		$crossbowSound.pitch_scale = rand_range(0.9,1.1)
-		$crossbowSound.play()
-		
-		var coll = raycast.get_collider()
-		if raycast.is_colliding() and coll.has_method("die"):
-			raycast.get_collider().recieve_damage()
-	elif Input.is_action_pressed("shoot") and !anim_player.is_playing():
-		anim_player.play("shoot")
-		
-		emit_signal("gun_fired")
-		
-		$crossbowSound.pitch_scale = rand_range(0.9,1.1)
-		$crossbowSound.play()
-		
-		var coll = raycast.get_collider()
-		if raycast.is_colliding() and coll.has_method("die"):
-			raycast.get_collider().recieve_damage()
 
+	if self.equipped_weapon == "firewand":
+		if Input.is_action_pressed("shoot"):
+			anim_player.play("shoot")
+
+			emit_signal("gun_fired")
+
+			$CanvasLayer/Control/FireWand.set_offset(Vector2(rand_range(-5,5),rand_range(-5,5)))
+
+			$crossbowSound.pitch_scale = rand_range(0.9,1.1)
+			$crossbowSound.play()
+
+			var coll = raycast.get_collider()
+			if raycast.is_colliding() and coll.has_method("die"):
+				raycast.get_collider().recieve_damage(raycast.get_collision_point())
+		else:
+			anim_player.play("idle")
+			$CanvasLayer/Control/FireWand.set_offset(Vector2(0,0))
+
+	elif Input.is_action_pressed("shoot") and !anim_player.is_playing() and self.equipped_weapon == "crossbow":
+		anim_player.play("shoot")
+
+		emit_signal("gun_fired")
+
+		$crossbowSound.pitch_scale = rand_range(0.9,1.1)
+		$crossbowSound.play()
+
+		var coll = raycast.get_collider()
+		if raycast.is_colliding() and coll.has_method("die"):
+			raycast.get_collider().recieve_damage(raycast.get_collision_point())
+
+
+	if Input.is_action_just_pressed("swapWeapon"):
+		if len(weapons) > 1:
+			if weapons[0] == equipped_weapon:
+				self.equip(1)
+			else:
+				self.equip(0)
+
+func equip(slot):
+	self.equipped_weapon = weapons[slot]
+
+	match weapons[slot]:
+		"crossbow":
+			$CanvasLayer/Control/Crossbow.visible = true
+			$CanvasLayer/Control/FireWand.visible = false
+		"firewand":
+			$CanvasLayer/Control/Crossbow.visible = false
+			$CanvasLayer/Control/FireWand.visible = true
+
+	anim_player.play("idle")
 
 func receive_damage():
 	player_health -= 1
-	
+
 	if player_health == 4:
 		$CanvasLayer/Heart5.hide()
 	elif player_health == 3 :
@@ -99,11 +128,11 @@ func receive_damage():
 		$CanvasLayer/Heart2.hide()
 	elif player_health == 0:
 		die()
-		
-		
+
+
 func heal(amount):
 	player_health += amount
-	
+
 	if player_health > 1:
 		$CanvasLayer/Heart2.show()
 	if player_health > 2 :
@@ -119,4 +148,3 @@ func die():
 	Global.player_node = null
 	var _result = get_tree().reload_current_scene()
 	queue_free()
-

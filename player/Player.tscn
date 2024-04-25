@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://player/Player.gd" type="Script" id=1]
 [ext_resource path="res://player/crosshair.png" type="Texture" id=2]
@@ -6,14 +6,18 @@
 [ext_resource path="res://assets/heart.png" type="Texture" id=4]
 [ext_resource path="res://assets/sounds/Crossbow_Shot.wav" type="AudioStream" id=5]
 [ext_resource path="res://assets/pixeloid-font/PixeloidMono-d94EV.ttf" type="DynamicFontData" id=6]
+[ext_resource path="res://assets/weapons/firewand.png" type="Texture" id=7]
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.5
 
+[sub_resource type="Animation" id=6]
+length = 0.001
+
 [sub_resource type="Animation" id=2]
 resource_name = "idle"
 tracks/0/type = "value"
-tracks/0/path = NodePath("CanvasLayer/Control/Sprite:frame")
+tracks/0/path = NodePath("CanvasLayer/Control/Crossbow:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -24,12 +28,24 @@ tracks/0/keys = {
 "update": 1,
 "values": [ 0 ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("CanvasLayer/Control/FireWand:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
 
 [sub_resource type="Animation" id=3]
 resource_name = "shoot"
 length = 0.4
 tracks/0/type = "value"
-tracks/0/path = NodePath("CanvasLayer/Control/Sprite:frame")
+tracks/0/path = NodePath("CanvasLayer/Control/Crossbow:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -39,6 +55,18 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 1, 2, 3, 0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("CanvasLayer/Control/FireWand:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 1, 1 ]
 }
 
 [sub_resource type="DynamicFont" id=4]
@@ -81,11 +109,20 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 
-[node name="Sprite" type="Sprite" parent="CanvasLayer/Control"]
+[node name="Crossbow" type="Sprite" parent="CanvasLayer/Control"]
 position = Vector2( 0, -186 )
 scale = Vector2( 6, 6 )
 texture = ExtResource( 3 )
 hframes = 5
+frame = 1
+
+[node name="FireWand" type="Sprite" parent="CanvasLayer/Control"]
+visible = false
+position = Vector2( 0, -186 )
+scale = Vector2( 6, 6 )
+texture = ExtResource( 7 )
+hframes = 2
+frame = 1
 
 [node name="Heart1" type="Sprite" parent="CanvasLayer"]
 position = Vector2( 54, 556 )
@@ -113,6 +150,7 @@ scale = Vector2( 8, 8 )
 texture = ExtResource( 4 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 6 )
 anims/idle = SubResource( 2 )
 anims/shoot = SubResource( 3 )
 
