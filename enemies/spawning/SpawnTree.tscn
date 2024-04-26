@@ -3,9 +3,9 @@
 [ext_resource path="res://assets/environment/tree_2_green.png" type="Texture" id=1]
 [ext_resource path="res://enemies/spawning/EnemySpawnPoint.tscn" type="PackedScene" id=2]
 
-[node name="SpawnTree" type="Spatial"]
+[node name="SpawnTree" type="Spatial" groups=["environment_objects"]]
 
-[node name="Tree" type="Sprite3D" parent="." groups=["environment_objects"]]
+[node name="Image" type="Sprite3D" parent="."]
 offset = Vector2( 0, 20 )
 pixel_size = 0.1
 texture = ExtResource( 1 )

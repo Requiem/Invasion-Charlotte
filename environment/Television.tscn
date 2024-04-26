@@ -13,12 +13,14 @@ extents = Vector3( 0.3, 0.65, 0.1 )
 [node name="TV" type="StaticBody"]
 script = ExtResource( 1 )
 
-[node name="whatsOnTV" type="Sprite3D" parent="."]
+[node name="Image" type="Spatial" parent="."]
+
+[node name="whatsOnTV" type="Sprite3D" parent="Image"]
 transform = Transform( 1, -0.000846017, -0.000247139, 0.000846071, 1, 0.000216373, 0.000246953, -0.000216585, 1, 0, 1.03, -0.5 )
 pixel_size = 0.005
 texture = ExtResource( 2 )
 
-[node name="blankTVSprite" type="Sprite3D" parent="."]
+[node name="blankTVSprite" type="Sprite3D" parent="Image"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
 pixel_size = 0.031
 texture = ExtResource( 3 )

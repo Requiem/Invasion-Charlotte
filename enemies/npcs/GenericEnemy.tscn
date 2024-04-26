@@ -33,7 +33,9 @@ script = ExtResource( 1 )
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.75, -0.008 )
 shape = SubResource( 1 )
 
-[node name="Sprite3D" type="Sprite3D" parent="."]
+[node name="Image" type="Spatial" parent="."]
+
+[node name="Sprite3D" type="Sprite3D" parent="Image"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0 )
 pixel_size = 0.05
 texture = ExtResource( 2 )
@@ -57,7 +59,7 @@ transform = Transform( 3, 0, 0, 0, -3.93403e-07, -1, 0, 9, -4.37114e-08, 0, 0.5,
 shape = SubResource( 2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-root_node = NodePath("../Sprite3D")
+root_node = NodePath("../Image/Sprite3D")
 anims/Goblin = SubResource( 3 )
 
 [node name="CombatReactionTimer" type="Timer" parent="."]

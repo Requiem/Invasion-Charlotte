@@ -25,8 +25,8 @@ func _jump_out_of_tv():
 	var goblinInstance = Goblin.instance()
 	goblinInstance.tv_spawn_node = self
 	get_tree().get_root().add_child(goblinInstance)
-	goblinInstance.starting_pos = self.get_node("whatsOnTV").global_translation
-	goblinInstance.translation = self.get_node("whatsOnTV").global_translation
+	goblinInstance.starting_pos = self.get_node("Image/whatsOnTV").global_translation
+	goblinInstance.translation = self.get_node("Image/whatsOnTV").global_translation
 	goblinInstance.should_respawn = true
 	$Tween.stop_all()
 
@@ -49,15 +49,15 @@ func spawn():
 
 
 func _remove_tv_image():
-	$whatsOnTV.hide()
+	$Image/whatsOnTV.hide()
 
 
 func _grow_enemy_sprite():
-	$whatsOnTV.show()
-	$whatsOnTV.texture = GoblinSprite
+	$Image/whatsOnTV.show()
+	$Image/whatsOnTV.texture = GoblinSprite
 	#$Tween.interpolate_property($whatsOnTV, "pixel_size", 0.05, 3)
-	$Tween.interpolate_property($whatsOnTV, "pixel_size", INITIAL_TV_IMAGE_SIZE, FINAL_TV_IMAGE_SIZE, TELEVISION_IMAGE_GROW_DURATION, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	$Tween.interpolate_property($whatsOnTV, "translation", Vector3(0, 1.05, -0.1), Vector3(0, 1, -0.1), TELEVISION_IMAGE_GROW_DURATION, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	$Tween.interpolate_property($Image/whatsOnTV, "pixel_size", INITIAL_TV_IMAGE_SIZE, FINAL_TV_IMAGE_SIZE, TELEVISION_IMAGE_GROW_DURATION, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	$Tween.interpolate_property($Image/whatsOnTV, "translation", Vector3(0, 1.05, -0.1), Vector3(0, 1, -0.1), TELEVISION_IMAGE_GROW_DURATION, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	$Tween.start()
 
 

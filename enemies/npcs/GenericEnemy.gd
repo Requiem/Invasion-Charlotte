@@ -7,6 +7,8 @@ export var rate_of_fire_seconds_per_shot = 0.3
 const HEIGHT_OF_PLAYER = Vector3(0, 1.5, 0) #TODO: is this correct?
 const STARTING_HEALTH_POINTS = 3
 const SMELLING_DISTANCE = 20
+
+const MIN_ATTACK_RANGE = 1.1
 var melee_range = 1
 var has_moved_within_attack_range
 
@@ -251,21 +253,21 @@ func _run_state_dependent_processes():
 				stop_attacking()
 				_move_toward_position(navAgent.get_next_location())
 			
-			if (is_within_inner_attack_range()):
+			if (is_within_min_attack_range()):
 				self.has_moved_within_attack_range = true
-			if ( not within_outer_attack_range()):
+			if ( not within_max_attack_range()):
 				self.has_moved_within_attack_range = false
 				
 	elif _current_state == STATES.DECEASED:
 		pass
 
 
-func is_within_inner_attack_range():
+func is_within_min_attack_range():
 	var distance_to_enemy = translation.distance_to(self._enemy_position)
-	return distance_to_enemy < 1
+	return distance_to_enemy < MIN_ATTACK_RANGE
 
 
-func within_outer_attack_range():
+func within_max_attack_range():
 	var distance_to_enemy = translation.distance_to(self._enemy_position)
 	return distance_to_enemy < melee_range
 
@@ -287,9 +289,10 @@ func attack():
 		$AttackTimer.start()
 		
 		
-# override for hornets. #TODO: delete vision area for hornets
+# all enemies see the player
 func player_is_detected():
-	return player_is_visible()
+	return true
+#	return player_is_visible()
 
 
 func player_is_visible():
@@ -363,7 +366,8 @@ func _physics_process(_delta):
 		queue_free()
 		return
 		
-	$Sprite3D.look_at(player_node.translation, Vector3.UP)
+	$Image.look_at(player_node.translation * Vector3(1, 0, 1), Vector3.UP)
+	print("image look at inside physics process for generic enemy ")
 
 	if (player_node.translation.distance_to(translation) < SMELLING_DISTANCE):
 		self.has_just_been_alerted = true
@@ -386,7 +390,7 @@ func _fade_away():
 func recieve_damage():
 	if _current_state != STATES.DECEASED:
 		num_health_points -= 3
-		$Sprite3D.modulate = Color8(255, 0, 0)
+		$Image/Sprite3D.modulate = Color8(255, 0, 0)
 		$DamageTimer.start()
 		playtakedamagesound()
 		
@@ -419,4 +423,4 @@ func set_player(p):
 	
 	
 func _on_DamageTimer_timeout():
-	$Sprite3D.modulate = Color8(255,255,255) 
+	$Image/Sprite3D.modulate = Color8(255,255,255) 

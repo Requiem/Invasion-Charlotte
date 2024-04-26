@@ -33,11 +33,7 @@ func _make_sprites_face_the_player():
 	for object in get_tree().get_nodes_in_group("environment_objects"):
 		var temp = Global.player_node.global_translation
 		temp.y = 0
-		object.look_at(temp, Vector3.UP)
-	for object in get_tree().get_nodes_in_group("enemies"):
-		var temp = Global.player_node.global_translation
-		temp.y = 0
-		object.look_at(temp, Vector3.UP)	
+		object.get_node("Image").look_at(temp, Vector3.UP)
 
 
 # this is where enemy waves are intialized	
