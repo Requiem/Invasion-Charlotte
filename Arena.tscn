@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://environment/mesh_library.meshlib" type="MeshLibrary" id=2]
@@ -7,6 +7,8 @@
 [ext_resource path="res://enemies/spawning/SpawnPointForTree.tscn" type="PackedScene" id=5]
 [ext_resource path="res://pickups/HealthPack.tscn" type="PackedScene" id=6]
 [ext_resource path="res://environment/Television.tscn" type="PackedScene" id=7]
+[ext_resource path="res://enemies/npcs/Hornet.tscn" type="PackedScene" id=8]
+[ext_resource path="res://enemies/npcs/Centaur.tscn" type="PackedScene" id=9]
 [ext_resource path="res://enemies/spawning/EnemySpawnPoint.tscn" type="PackedScene" id=10]
 
 [node name="World" type="Spatial"]
@@ -124,5 +126,9 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 3, 4.5 )
 
 [node name="HornetSpawnPoint6" parent="HornetSpawnPoints" groups=["enemy_spawn_points_wave_2"] instance=ExtResource( 10 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 3, 5.5 )
+
+[node name="Hornet" parent="." instance=ExtResource( 8 )]
+
+[node name="Centaur" parent="." instance=ExtResource( 9 )]
 
 [connection signal="body_entered" from="HealthPack" to="HealthPack" method="_on_HealthPack_body_entered"]

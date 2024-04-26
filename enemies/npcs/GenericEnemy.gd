@@ -367,7 +367,6 @@ func _physics_process(_delta):
 		return
 		
 	$Image.look_at(player_node.translation * Vector3(1, 0, 1), Vector3.UP)
-	print("image look at inside physics process for generic enemy ")
 
 	if (player_node.translation.distance_to(translation) < SMELLING_DISTANCE):
 		self.has_just_been_alerted = true
