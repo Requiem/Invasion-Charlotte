@@ -6,7 +6,7 @@ const gravity = 320
 
 onready var anim_player = $AnimationPlayer
 onready var raycast = $RayCast
-onready var fire_particles = $CanvasLayer/Control/Particles2D
+onready var particles = $CanvasLayer/Control/Particles2D
 
 onready var player_health = 5
 var equipped_weapon
@@ -74,7 +74,7 @@ func _physics_process(delta):
 
 			$CanvasLayer/Control/FireWand.set_offset(Vector2(rand_range(-5,5),rand_range(-5,5)))
 
-			fire_particles.emitting = true
+			particles.emitting = true
 
 			$crossbowSound.pitch_scale = rand_range(0.9,1.1)
 			$crossbowSound.play()
@@ -84,7 +84,7 @@ func _physics_process(delta):
 				raycast.get_collider().recieve_damage()
 		else:
 			anim_player.play("idle")
-			fire_particles.emitting = false
+			particles.emitting = false
 			$CanvasLayer/Control/FireWand.set_offset(Vector2(0,0))
 
 	elif Input.is_action_pressed("shoot") and !anim_player.is_playing() and self.weapons[equipped_weapon] == "crossbow":
@@ -101,6 +101,7 @@ func _physics_process(delta):
 
 
 	if Input.is_action_just_pressed("swapWeapon"):
+		particles.emitting = false
 		if len(weapons) > 1:
 			if equipped_weapon == 0:
 				self.equip(1)
