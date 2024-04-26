@@ -7,7 +7,7 @@ const TOTAL_NUMBER_OF_WAVES = 2
 var Goblin = load("res://enemies/npcs/Goblin.tscn")
 var Hornet = load("res://enemies/npcs/Hornet.tscn")
 var SpawnTree = load("res://enemies/spawning/SpawnTree.tscn")
-#onready var enemy_spawn_point_list = get_tree().get_nodes_in_group("enemy_spawn_points") 
+
 onready var tree_spawn_point_list = get_tree().get_nodes_in_group("spawn_spawn_points") 
 var current_wave_num
 
@@ -16,6 +16,7 @@ func _ready():
 	current_wave_num = 0
 	
 
+# setup arena with spawn points and enemies
 func _setup_arena():
 	print("debug about to enable spawn points")
 	var enemy_spawn_point_list = get_tree().get_nodes_in_group("enemy_spawn_points") 
@@ -25,6 +26,10 @@ func _setup_arena():
 	
 	
 func _physics_process(_delta):
+	_make_sprites_face_the_player()
+
+
+func _make_sprites_face_the_player():
 	for object in get_tree().get_nodes_in_group("environment_objects"):
 		var temp = Global.player_node.global_translation
 		temp.y = 0
@@ -32,9 +37,10 @@ func _physics_process(_delta):
 	for object in get_tree().get_nodes_in_group("enemies"):
 		var temp = Global.player_node.global_translation
 		temp.y = 0
-		object.look_at(temp, Vector3.UP)
+		object.look_at(temp, Vector3.UP)	
 
-	
+
+# this is where enemy waves are intialized	
 func on_enemy_died():
 	var enemies_list = get_tree().get_nodes_in_group("enemies") 
 	print("debug, enemies_list_size: " + str(enemies_list.size()))
@@ -53,9 +59,10 @@ func start_next_wave():
 	spawn_enemies(_enemy_spawn_point_list)
 	
 		
+# the end of the game
 func on_all_waves_finished():
 	print("debug, all enemies eliminated")
-	get_tree().get_root().get_node("World/Player").flash_instructions_for_reset()
+	get_tree().get_root().get_node("World/Player").show_instructions_for_reset()
 		
 	
 func spawn_spawn_points():
@@ -114,7 +121,6 @@ func pickRandomIndexes(list: Array, N: int) -> Array:
 
 	# Ensure N does not exceed the size of the list
 	N = min(N, listSize)
-
 
 	# Pick random indexes
 	while randomIndexes.size() < N:

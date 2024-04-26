@@ -19,13 +19,13 @@ func _ready():
 	self.weapons.append("crossbow")
 	Global.player_node = self
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	#yield(get_tree(), "idle_frame")
-	#get_tree().call_group("zombies", "set_player", self)
+	
+	# this has to do with the music playing when the player dies, but not restarting the music
 	if (not  MusicController.get_node("Music").playing):
 		MusicController.play_music()
 
 
-func flash_instructions_for_reset():
+func show_instructions_for_reset():
 	$HUDInstructionText.show()
 
 
@@ -69,7 +69,6 @@ func _physics_process(delta):
 		if Input.is_action_pressed("shoot"):
 			anim_player.play("shoot")
 			
-
 			emit_signal("gun_fired")
 
 			$CanvasLayer/Control/FireWand.set_offset(Vector2(rand_range(-5,5),rand_range(-5,5)))
@@ -99,7 +98,6 @@ func _physics_process(delta):
 		if raycast.is_colliding() and coll.has_method("die"):
 			raycast.get_collider().recieve_damage()
 
-
 	if Input.is_action_just_pressed("swapWeapon"):
 		particles.emitting = false
 		if len(weapons) > 1:
@@ -107,6 +105,7 @@ func _physics_process(delta):
 				self.equip(1)
 			else:
 				self.equip(0)
+
 
 func equip(slot):
 	self.equipped_weapon = slot
@@ -126,6 +125,7 @@ func equip(slot):
 
 	anim_player.play("idle")
 
+
 func pickup_weapon(slot, name):
 	var texture = ImageTexture.new()
 	var image = Image.new()
@@ -136,6 +136,7 @@ func pickup_weapon(slot, name):
 		$CanvasLayer/Thumb1.set_texture(texture)
 	elif slot == 1:
 		$CanvasLayer/Thumb2.set_texture(texture)
+
 
 func receive_damage():
 	player_health -= 1
@@ -164,6 +165,7 @@ func heal(amount):
 	if player_health > 5:
 		$CanvasLayer/Heart5.show()
 		player_health = 5
+
 
 func die():
 	$HUDInstructionText.hide() #TODO: does this need to be here?

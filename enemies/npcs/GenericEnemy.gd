@@ -94,9 +94,6 @@ func _update_state_machine():
 	
 	if _current_state == STATES.INIT:
 		_current_state = STATES.IDLE
-#		meshAnimationTree["parameters/conditions/idle"] = true
-#		meshAnimationTree["parameters/conditions/walking"] = false
-#		meshAnimationTree["parameters/conditions/alerted"] = false
 		can_hear = true
 		can_see = true
 
@@ -107,15 +104,8 @@ func _update_state_machine():
 			_current_state = STATES.DECEASED
 		elif has_just_been_alerted:
 			_current_state = STATES.COMBAT
-#			meshAnimationTree["parameters/conditions/alerted"] = true
-#		elif waypoint_graph != null:
-#			if waypoint_graph.waypoint_list.size() > 0:
-#				_current_state = STATES.PATROL
 
 	elif _current_state == STATES.PATROL:
-#		meshAnimationTree["parameters/conditions/idle"] = false
-#		meshAnimationTree["parameters/conditions/walking"] = true
-#		meshAnimationTree["parameters/conditions/alerted"] = false
 		can_hear = true
 		can_see = true
 		if num_health_points <= 0:
@@ -124,7 +114,6 @@ func _update_state_machine():
 			_current_state = STATES.COMBAT
 
 	elif _current_state == STATES.COMBAT:
-		
 		can_hear = true
 		can_see = true
 		if num_health_points <= 0:
@@ -147,7 +136,6 @@ func _process(_delta):
 	_run_state_exit_events()
 	_run_state_enter_events()
 	_run_state_dependent_processes()
-	#$Sprite3D.modulate = Color8(255, 255, 255)
 
 
 func _run_state_exit_events():
@@ -185,13 +173,9 @@ func _run_state_enter_events():
 		_alert_the_npc(player_node.global_transform.origin)
 		_enter_combat()
 	elif _current_state == STATES.DECEASED and _previous_state != STATES.DECEASED:
-		#$PatrolTimer.disconnect("timeout", self, "_on_to_next_destination")
 		_unregister_listener_for_player_gun_sounds()
-		#_change_mesh_color(Color(0,0,0,1))
-		#play_dying_animation()
-		#EnemySoundController.play_next_death_sound()
 		_remove_npc_from_player_collisions()
-		#spawn_ammo()
+
 		var _result = $ObliterationTimer.connect("timeout", self, "_fade_away")
 		$ObliterationTimer.start()
 
@@ -210,11 +194,9 @@ func _unregister_listener_for_player_gun_sounds():
 
 
 func _react_to_gun_sound():
-#	if can_hear and Vector3(global_transform.origin - player_node.global_transform.origin).length() <= MAXIMUM_EARSHOT_DISTANCE * weapon_noise_level_ratio:
-#		if ! is_alerted:
-#			self.has_just_been_alerted = true
 	if can_hear and ! is_alerted:
 		self.has_just_been_alerted = true
+
 
 func _enter_combat():
 	if not $CombatReactionTimer.is_connected("timeout", self, "_start_attacking"):
@@ -273,9 +255,7 @@ func _run_state_dependent_processes():
 				self.has_moved_within_attack_range = true
 			if ( not within_outer_attack_range()):
 				self.has_moved_within_attack_range = false
-			
-
-
+				
 	elif _current_state == STATES.DECEASED:
 		pass
 
@@ -291,21 +271,11 @@ func within_outer_attack_range():
 
 
 func _move_toward_position(_target_pos):
-#	var direction = global_transform.origin.direction_to(target_pos)
-#	var final_velocity = direction * MOVE_SPEED
-#	self.actual_velocity.x = lerp(self.actual_velocity.x, final_velocity.x, ACCELERATION_RATE)
-#	self.actual_velocity.z = lerp(self.actual_velocity.z, final_velocity.z, ACCELERATION_RATE)
-#
-#	self.actual_velocity *= Vector3(1, 0, 1) # vector for feet on the ground
-#	self.actual_velocity.y -= 4.0
-#	var _move_result = move_and_slide(self.actual_velocity*10, Vector3.UP)
-	#meshAnimationTree["parameters/running/Blend2/blend_amount"] = 1.0
 	var vec_to_player = player_node.translation
 	
 	var direction = global_transform.origin.direction_to(vec_to_player)
 	var final_velocity = direction * move_speed
 	
-	#vec_to_player = vec_to_player.normalized()
 	self.look_at(player_node.translation, Vector3.UP)
 	var _result = move_and_slide(final_velocity * move_speed)	
 	
@@ -340,6 +310,7 @@ func player_is_visible():
 		is_visible = true
 
 	return is_visible
+
 
 # for firing projectiles
 func grid_map_is_in_the_way(player_position):
@@ -392,19 +363,10 @@ func _physics_process(_delta):
 		queue_free()
 		return
 		
-#	var vec_to_player = player_node.translation - translation
-#	vec_to_player = vec_to_player.normalized()
-#	self.look_at(player_node.translation, Vector3.UP)
 	$Sprite3D.look_at(player_node.translation, Vector3.UP)
 
 	if (player_node.translation.distance_to(translation) < SMELLING_DISTANCE):
 		self.has_just_been_alerted = true
-	
-#	var vec_to_player = player.translation - translation
-#	vec_to_player = vec_to_player.normalized()
-#	raycast.cast_to = vec_to_player * 1.5
-	
-#	move_and_collide(vec_to_player * MOVE_SPEED * delta)
 
 	if not is_flyer:
 		var move_vec = Vector3()
@@ -416,13 +378,6 @@ func _physics_process(_delta):
 	if player == null:
 		return
 
-#
-#	if raycast.is_colliding():
-#		var coll = raycast.get_collider()
-#		if coll != null and coll.name == "Player":
-#			pass
-#			#coll.die()
-
 
 func _fade_away():
 	die()
@@ -430,22 +385,15 @@ func _fade_away():
 
 func recieve_damage():
 	if _current_state != STATES.DECEASED:
-		#if _is_headshot(collision_point):
-		#	num_health_points = 0
-		#else:		
-		#	num_health_points -= 3
-			
 		num_health_points -= 3
 		$Sprite3D.modulate = Color8(255, 0, 0)
 		$DamageTimer.start()
 		playtakedamagesound()
 		
-		
 		if _current_state != STATES.COMBAT: #TODO: make independent of current state. timing could be off?
 			if ! is_alerted:
 				self.has_just_been_alerted = true
-#		if num_health_points >= 0:
-#			EnemySoundController.play_next_injury_sound()
+
 
 func playtakedamagesound():
 	pass
@@ -454,7 +402,7 @@ func playtakedamagesound():
 func die():
 	dead = true
 	$CollisionShape.disabled = true
-#	anim_player.play("die")
+
 	$ObliterationTimer.disconnect("timeout", self, "_fade_away")
 	emit_signal("enemy_died")
 
@@ -466,12 +414,9 @@ func respawn_or_disappear():
 	pass
 
 
-		
-
-
-
 func set_player(p):
 	player = p
-
+	
+	
 func _on_DamageTimer_timeout():
 	$Sprite3D.modulate = Color8(255,255,255) 
