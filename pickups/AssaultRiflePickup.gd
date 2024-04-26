@@ -18,7 +18,11 @@ func _process(_delta):
 
 func _on_AssaultRiflePickup_body_entered(body):
 	if body.is_in_group("player"):
-		player_node.equipped_weapon = "firewand"
-		player_node.weapons.append("firewand")
-		player_node.equip(1)
+		if len(player_node.weapons) == 1:
+			player_node.weapons.append("firewand")
+			player_node.equip(1)
+			player_node.pickup_weapon(1, "firewand")
+		else:
+			player_node.weapons[player_node.equipped_weapon] = "firewand"
+			player_node.pickup_weapon(player_node.equipped_weapon, "firewand")
 		queue_free()

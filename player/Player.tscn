@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://player/Player.gd" type="Script" id=1]
 [ext_resource path="res://player/crosshair.png" type="Texture" id=2]
@@ -7,6 +7,9 @@
 [ext_resource path="res://assets/sounds/Crossbow_Shot.wav" type="AudioStream" id=5]
 [ext_resource path="res://assets/pixeloid-font/PixeloidMono-d94EV.ttf" type="DynamicFontData" id=6]
 [ext_resource path="res://assets/weapons/firewand.png" type="Texture" id=7]
+[ext_resource path="res://assets/weapons/background.png" type="Texture" id=8]
+[ext_resource path="res://assets/weapons/selector.png" type="Texture" id=9]
+[ext_resource path="res://assets/weapons/crossbowThumb.png" type="Texture" id=10]
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.5
@@ -200,6 +203,30 @@ texture = ExtResource( 4 )
 position = Vector2( 51, 207 )
 scale = Vector2( 8, 8 )
 texture = ExtResource( 4 )
+
+[node name="Slot1" type="Sprite" parent="CanvasLayer"]
+position = Vector2( 860, 543 )
+scale = Vector2( 4, 4 )
+texture = ExtResource( 8 )
+
+[node name="Thumb1" type="Sprite" parent="CanvasLayer"]
+position = Vector2( 860, 543 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 10 )
+
+[node name="Slot2" type="Sprite" parent="CanvasLayer"]
+position = Vector2( 968, 543 )
+scale = Vector2( 4, 4 )
+texture = ExtResource( 8 )
+
+[node name="Thumb2" type="Sprite" parent="CanvasLayer"]
+position = Vector2( 968, 543 )
+scale = Vector2( 3, 3 )
+
+[node name="Selector" type="Sprite" parent="CanvasLayer"]
+position = Vector2( 860, 542 )
+scale = Vector2( 3.6, 3.6 )
+texture = ExtResource( 9 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 6 )

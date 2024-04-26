@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/crossbowThumb.png-1fe6834a5f24b9edda21e3896464674e.stex"
+path="res://.import/background.png-22c5d7c18e90c35324a6f2019ac89299.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/weapons/crossbowThumb.png"
-dest_files=[ "res://.import/crossbowThumb.png-1fe6834a5f24b9edda21e3896464674e.stex" ]
+source_file="res://assets/weapons/background.png"
+dest_files=[ "res://.import/background.png-22c5d7c18e90c35324a6f2019ac89299.stex" ]
 
 [params]
 
