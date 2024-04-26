@@ -161,7 +161,6 @@ func _un_alert_the_npc():
 
 
 func _exit_combat():
-	print("stopping attacking") #debug
 	stop_attacking()
 	$CombatReactionTimer.disconnect("timeout", self, "_start_attacking")
 	$TargetTrackerTimer.disconnect("timeout", self, "track_target")
@@ -261,15 +260,12 @@ func _run_state_dependent_processes():
 		
 		turn_towards_target(navAgent.get_next_location())	
 		self._enemy_position = player_node.translation
-		if player_is_visible() and self._enemy_position != null and self.has_reacted_to_attack:
-			print("debug, inside the branch for attacking")
+		if player_is_detected() and self._enemy_position != null and self.has_reacted_to_attack:
 			
 			if self.has_moved_within_attack_range:
-				print("debug, within attack_range")
 				attack()
 			else:
 				self.has_moved_within_attack_range = false
-				print("debug, not within outer attack range")
 				stop_attacking()
 				_move_toward_position(navAgent.get_next_location())
 			
@@ -319,6 +315,11 @@ func attack():
 		$AttackTimer.wait_time = rate_of_fire_seconds_per_shot
 		var _connect_result = $AttackTimer.connect("timeout", self, "_melee_attack")
 		$AttackTimer.start()
+		
+		
+# override for hornets. #TODO: delete vision area for hornets
+func player_is_detected():
+	return player_is_visible()
 
 
 func player_is_visible():

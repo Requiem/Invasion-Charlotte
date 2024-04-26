@@ -2,9 +2,10 @@ extends "res://enemies/npcs/GenericEnemy.gd"
 
 var tv_spawn_node
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	rate_of_fire_seconds_per_shot = 1
 
 
 func die():

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://environment/mesh_library.meshlib" type="MeshLibrary" id=2]
@@ -8,7 +8,6 @@
 [ext_resource path="res://pickups/HealthPack.tscn" type="PackedScene" id=6]
 [ext_resource path="res://environment/Television.tscn" type="PackedScene" id=7]
 [ext_resource path="res://enemies/npcs/Hornet.tscn" type="PackedScene" id=8]
-[ext_resource path="res://enemies/npcs/Centaur.tscn" type="PackedScene" id=9]
 [ext_resource path="res://enemies/spawning/EnemySpawnPoint.tscn" type="PackedScene" id=10]
 
 [node name="World" type="Spatial"]
@@ -46,9 +45,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.742, 0, -2.672 )
 [node name="MagicWandPickup" parent="." instance=ExtResource( 3 )]
 
 [node name="Hornet" parent="." groups=["enemies"] instance=ExtResource( 8 )]
-
-[node name="Centaur" parent="." instance=ExtResource( 9 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.08054, 0, 0 )
 
 [node name="TreeSpawnPoints" type="Node" parent="."]
 

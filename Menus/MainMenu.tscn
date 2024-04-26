@@ -1,11 +1,19 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Menus/MainMenu.gd" type="Script" id=1]
 [ext_resource path="res://Menus/main_menu_title_them.tres" type="DynamicFont" id=2]
 [ext_resource path="res://Menus/main_menu_instruction_theme.tres" type="Theme" id=3]
+[ext_resource path="res://assets/pixeloid-font/PixeloidMono-d94EV.ttf" type="DynamicFontData" id=4]
 
-[sub_resource type="Theme" id=1]
+[sub_resource type="Theme" id=4]
 default_font = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 32
+font_data = ExtResource( 4 )
+
+[sub_resource type="Theme" id=3]
+default_font = SubResource( 2 )
 
 [node name="MainMenu" type="Control"]
 anchor_right = 1.0
@@ -26,14 +34,33 @@ margin_top = 361.0
 margin_right = 854.0
 margin_bottom = 495.0
 theme = ExtResource( 3 )
-text = " Press the Space Bar to Go......."
+text = "Press the Space Bar to Go.......Press Escape for the credits"
 
 [node name="MainTitle" type="RichTextLabel" parent="."]
 margin_left = 58.0
 margin_top = 114.0
 margin_right = 790.0
 margin_bottom = 334.0
-theme = SubResource( 1 )
+theme = SubResource( 4 )
 bbcode_enabled = true
 bbcode_text = "[center]The Gastonia Arena[/center]"
 text = "The Gastonia Arena"
+
+[node name="Credits" type="RichTextLabel" parent="."]
+visible = false
+margin_left = 176.0
+margin_top = 114.0
+margin_right = 949.0
+margin_bottom = 452.0
+theme = SubResource( 3 )
+bbcode_enabled = true
+bbcode_text = "[center]Credits:[/center]
+
+David - Lead Programmer
+Zach - Lead Artist
+Reed - Designer and Storyteller"
+text = "Credits:
+
+David - Lead Programmer
+Zach - Lead Artist
+Reed - Designer and Storyteller"

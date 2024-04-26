@@ -8,3 +8,8 @@ func _ready():
 
 func respawn_or_disappear():
 	queue_free()
+
+
+# the hornet knows all
+func player_is_detected():
+	return true
