@@ -30,7 +30,7 @@ func respawn():
 		dead = false
 
 		_current_state = STATES.INIT
-		num_health_points = STARTING_HEALTH_POINTS
+		num_health_points = starting_health_points
 		_register_listener_for_player_gun_sounds()
 
 

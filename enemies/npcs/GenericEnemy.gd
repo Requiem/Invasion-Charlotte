@@ -5,7 +5,7 @@ var move_speed = 2
 export var ACCELERATION_RATE = 0.1
 export var rate_of_fire_seconds_per_shot = 1
 const HEIGHT_OF_PLAYER = Vector3(0, 1.5, 0) #TODO: is this correct?
-const STARTING_HEALTH_POINTS = 3
+var starting_health_points = 3
 const SMELLING_DISTANCE = 20
 
 const MIN_ATTACK_RANGE = 1.1
@@ -83,7 +83,7 @@ func _ready():
 
 	
 	_current_state = STATES.INIT
-	num_health_points = STARTING_HEALTH_POINTS 
+	num_health_points = starting_health_points 
 	_update_state_machine()
 
 
