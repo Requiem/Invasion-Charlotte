@@ -254,8 +254,9 @@ func _run_state_dependent_processes():
 				_move_toward_position(navAgent.get_next_location())
 			
 			if (is_within_min_attack_range()):
+				if not self.has_moved_within_attack_range:
+					_melee_attack()
 				self.has_moved_within_attack_range = true
-				_melee_attack()
 			if ( not within_max_attack_range()):
 				self.has_moved_within_attack_range = false
 				
