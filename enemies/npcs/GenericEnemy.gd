@@ -3,7 +3,7 @@ extends KinematicBody
 
 var move_speed = 2
 export var ACCELERATION_RATE = 0.1
-export var rate_of_fire_seconds_per_shot = 0.3
+export var rate_of_fire_seconds_per_shot = 1
 const HEIGHT_OF_PLAYER = Vector3(0, 1.5, 0) #TODO: is this correct?
 const STARTING_HEALTH_POINTS = 3
 const SMELLING_DISTANCE = 20
@@ -255,6 +255,7 @@ func _run_state_dependent_processes():
 			
 			if (is_within_min_attack_range()):
 				self.has_moved_within_attack_range = true
+				_melee_attack()
 			if ( not within_max_attack_range()):
 				self.has_moved_within_attack_range = false
 				
