@@ -6,6 +6,7 @@ const gravity = 320
 
 onready var anim_player = $AnimationPlayer
 onready var raycast = $RayCast
+onready var fire_particles = $CanvasLayer/Control/Particles2D
 
 onready var player_health = 5
 var equipped_weapon
@@ -14,7 +15,7 @@ var weapons = []
 signal gun_fired
 
 func _ready():
-	self.equipped_weapon = "crossbow"
+	self.equipped_weapon = 0
 	self.weapons.append("crossbow")
 	Global.player_node = self
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -64,13 +65,16 @@ func _physics_process(delta):
 	move_vec.y -= gravity * delta
 	move_vec = move_and_slide(move_vec, Vector3.UP)
 
-	if self.equipped_weapon == "firewand":
+	if self.weapons[equipped_weapon] == "firewand":
 		if Input.is_action_pressed("shoot"):
 			anim_player.play("shoot")
+			
 
 			emit_signal("gun_fired")
 
 			$CanvasLayer/Control/FireWand.set_offset(Vector2(rand_range(-5,5),rand_range(-5,5)))
+
+			fire_particles.emitting = true
 
 			$crossbowSound.pitch_scale = rand_range(0.9,1.1)
 			$crossbowSound.play()
@@ -80,9 +84,10 @@ func _physics_process(delta):
 				raycast.get_collider().recieve_damage()
 		else:
 			anim_player.play("idle")
+			fire_particles.emitting = false
 			$CanvasLayer/Control/FireWand.set_offset(Vector2(0,0))
 
-	elif Input.is_action_pressed("shoot") and !anim_player.is_playing() and self.equipped_weapon == "crossbow":
+	elif Input.is_action_pressed("shoot") and !anim_player.is_playing() and self.weapons[equipped_weapon] == "crossbow":
 		anim_player.play("shoot")
 
 		emit_signal("gun_fired")
@@ -97,15 +102,20 @@ func _physics_process(delta):
 
 	if Input.is_action_just_pressed("swapWeapon"):
 		if len(weapons) > 1:
-			if weapons[0] == equipped_weapon:
+			if equipped_weapon == 0:
 				self.equip(1)
 			else:
 				self.equip(0)
 
 func equip(slot):
-	self.equipped_weapon = weapons[slot]
+	self.equipped_weapon = slot
+	
+	if equipped_weapon == 0:
+		$CanvasLayer/Selector.set_offset(Vector2(0,0))
+	else:
+		$CanvasLayer/Selector.set_offset(Vector2(30,0))
 
-	match weapons[slot]:
+	match weapons[equipped_weapon]:
 		"crossbow":
 			$CanvasLayer/Control/Crossbow.visible = true
 			$CanvasLayer/Control/FireWand.visible = false
@@ -114,6 +124,17 @@ func equip(slot):
 			$CanvasLayer/Control/FireWand.visible = true
 
 	anim_player.play("idle")
+
+func pickup_weapon(slot, name):
+	var texture = ImageTexture.new()
+	var image = Image.new()
+	image.load("res://assets/weapons/" + name + "Thumb.png")
+	texture.create_from_image(image)
+	
+	if slot == 0:
+		$CanvasLayer/Thumb1.set_texture(texture)
+	elif slot == 1:
+		$CanvasLayer/Thumb2.set_texture(texture)
 
 func receive_damage():
 	player_health -= 1

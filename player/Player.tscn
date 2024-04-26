@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://player/Player.gd" type="Script" id=1]
 [ext_resource path="res://player/crosshair.png" type="Texture" id=2]
@@ -7,9 +7,49 @@
 [ext_resource path="res://assets/sounds/Crossbow_Shot.wav" type="AudioStream" id=5]
 [ext_resource path="res://assets/pixeloid-font/PixeloidMono-d94EV.ttf" type="DynamicFontData" id=6]
 [ext_resource path="res://assets/weapons/firewand.png" type="Texture" id=7]
+[ext_resource path="res://assets/weapons/background.png" type="Texture" id=8]
+[ext_resource path="res://assets/weapons/selector.png" type="Texture" id=9]
+[ext_resource path="res://assets/weapons/crossbowThumb.png" type="Texture" id=10]
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.5
+
+[sub_resource type="ParticlesMaterial" id=7]
+lifetime_randomness = 0.36
+emission_shape = 5
+emission_ring_radius = 2.0
+emission_ring_inner_radius = 0.0
+emission_ring_height = 1.0
+emission_ring_axis = Vector3( 0, 0, 1 )
+flag_disable_z = true
+direction = Vector3( 0, 0, 0 )
+spread = 180.0
+gravity = Vector3( 0, -20, 0 )
+initial_velocity = 50.0
+initial_velocity_random = 1.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel = 5.0
+damping = 5.0
+angle = 180.0
+angle_random = 0.45
+scale = 5.86
+scale_random = 0.46
+
+[sub_resource type="Gradient" id=8]
+interpolation_mode = 2
+colors = PoolColorArray( 0.905882, 0.368627, 0, 1, 0.992188, 0.348816, 0, 0.329412 )
+
+[sub_resource type="GradientTexture" id=9]
+gradient = SubResource( 8 )
+width = 1
+
+[sub_resource type="Gradient" id=10]
+offsets = PoolRealArray( 0, 0.28655, 0.795322 )
+colors = PoolColorArray( 1, 0, 0, 1, 1, 0.169017, 0, 1, 1, 0.431373, 0, 1 )
+
+[sub_resource type="GradientTexture" id=11]
+gradient = SubResource( 10 )
 
 [sub_resource type="Animation" id=6]
 length = 0.001
@@ -120,9 +160,24 @@ frame = 1
 visible = false
 position = Vector2( 0, -186 )
 scale = Vector2( 6, 6 )
+z_index = 1
 texture = ExtResource( 7 )
 hframes = 2
 frame = 1
+
+[node name="Particles2D" type="Particles2D" parent="CanvasLayer/Control"]
+modulate = Color( 1, 0.584314, 0, 1 )
+position = Vector2( 8, -178 )
+scale = Vector2( 4, 4 )
+emitting = false
+amount = 64
+speed_scale = 2.5
+explosiveness = 0.1
+randomness = 0.22
+draw_order = 1
+process_material = SubResource( 7 )
+texture = SubResource( 9 )
+normal_map = SubResource( 11 )
 
 [node name="Heart1" type="Sprite" parent="CanvasLayer"]
 position = Vector2( 54, 556 )
@@ -148,6 +203,30 @@ texture = ExtResource( 4 )
 position = Vector2( 51, 207 )
 scale = Vector2( 8, 8 )
 texture = ExtResource( 4 )
+
+[node name="Slot1" type="Sprite" parent="CanvasLayer"]
+position = Vector2( 860, 543 )
+scale = Vector2( 4, 4 )
+texture = ExtResource( 8 )
+
+[node name="Thumb1" type="Sprite" parent="CanvasLayer"]
+position = Vector2( 860, 543 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 10 )
+
+[node name="Slot2" type="Sprite" parent="CanvasLayer"]
+position = Vector2( 968, 543 )
+scale = Vector2( 4, 4 )
+texture = ExtResource( 8 )
+
+[node name="Thumb2" type="Sprite" parent="CanvasLayer"]
+position = Vector2( 968, 543 )
+scale = Vector2( 3, 3 )
+
+[node name="Selector" type="Sprite" parent="CanvasLayer"]
+position = Vector2( 860, 542 )
+scale = Vector2( 3.6, 3.6 )
+texture = ExtResource( 9 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 6 )
