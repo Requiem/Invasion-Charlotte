@@ -6,7 +6,7 @@ export var RATE_OF_FIRE_SECONDS_PER_SHOT = 0.3
 const HEIGHT_OF_PLAYER = Vector3(0, 1.5, 0) #TODO: is this correct?
 const STARTING_HEALTH_POINTS = 6
 const SMELLING_DISTANCE = 20
-const MELEE_RANGE = 3
+const melee_range = 3
 
 const gravity = 320
 
@@ -233,7 +233,7 @@ func _run_state_dependent_processes():
 		
 		turn_towards_target(navAgent.get_next_location())	
 		self._enemy_position = player_node.translation
-		if player_is_visible() and self._enemy_position != null and self.has_reacted_to_attack and _is_within_attack_range():
+		if player_is_visible() and self._enemy_position != null and self.has_reacted_to_attack and is_within_attack_range():
 			#meshAnimationTree["parameters/running/Blend2/blend_amount"] = 0.0
 			attack()
 		elif self.has_reacted_to_attack:
@@ -244,9 +244,9 @@ func _run_state_dependent_processes():
 		pass
 
 
-func _is_within_attack_range():
+func is_within_attack_range():
 	var distance_to_enemy = translation.distance_to(self._enemy_position)
-	return distance_to_enemy < MELEE_RANGE
+	return distance_to_enemy < melee_range
 
 
 func _move_toward_position(target_pos):
@@ -274,7 +274,6 @@ func attack():
 		$AttackTimer.wait_time = RATE_OF_FIRE_SECONDS_PER_SHOT
 		var _connect_result = $AttackTimer.connect("timeout", self, "_melee_attack")
 		$AttackTimer.start()
-	pass
 
 
 func player_is_visible():

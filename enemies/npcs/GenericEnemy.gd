@@ -3,11 +3,12 @@ extends KinematicBody
 
 var move_speed = 2
 export var ACCELERATION_RATE = 0.1
-export var RATE_OF_FIRE_SECONDS_PER_SHOT = 0.3
+export var rate_of_fire_seconds_per_shot = 0.3
 const HEIGHT_OF_PLAYER = Vector3(0, 1.5, 0) #TODO: is this correct?
 const STARTING_HEALTH_POINTS = 3
 const SMELLING_DISTANCE = 20
-const MELEE_RANGE = 1
+var melee_range = 1
+var has_moved_within_attack_range
 
 const NUM_DEATH_SOUNDS = 4
 
@@ -65,6 +66,7 @@ var _enemy_position = null
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	self.has_moved_within_attack_range = false
 	should_respawn = false
 	player_node = Global.player_node
 	
@@ -159,6 +161,7 @@ func _un_alert_the_npc():
 
 
 func _exit_combat():
+	print("stopping attacking") #debug
 	stop_attacking()
 	$CombatReactionTimer.disconnect("timeout", self, "_start_attacking")
 	$TargetTrackerTimer.disconnect("timeout", self, "track_target")
@@ -175,7 +178,6 @@ func _melee_attack():
 		return
 		
 	player_node.receive_damage()
-	print("debug Melee attacked ")
 
 
 func _run_state_enter_events():	
@@ -259,20 +261,37 @@ func _run_state_dependent_processes():
 		
 		turn_towards_target(navAgent.get_next_location())	
 		self._enemy_position = player_node.translation
-		if player_is_visible() and self._enemy_position != null and self.has_reacted_to_attack and _is_within_attack_range():
-			#meshAnimationTree["parameters/running/Blend2/blend_amount"] = 0.0
-			attack()
-		elif self.has_reacted_to_attack:
-			stop_attacking()
-			_move_toward_position(navAgent.get_next_location())
+		if player_is_visible() and self._enemy_position != null and self.has_reacted_to_attack:
+			print("debug, inside the branch for attacking")
+			
+			if self.has_moved_within_attack_range:
+				print("debug, within attack_range")
+				attack()
+			else:
+				self.has_moved_within_attack_range = false
+				print("debug, not within outer attack range")
+				stop_attacking()
+				_move_toward_position(navAgent.get_next_location())
+			
+			if (is_within_inner_attack_range()):
+				self.has_moved_within_attack_range = true
+			if ( not within_outer_attack_range()):
+				self.has_moved_within_attack_range = false
+			
+
 
 	elif _current_state == STATES.DECEASED:
 		pass
 
 
-func _is_within_attack_range():
+func is_within_inner_attack_range():
 	var distance_to_enemy = translation.distance_to(self._enemy_position)
-	return distance_to_enemy < MELEE_RANGE
+	return distance_to_enemy < 1
+
+
+func within_outer_attack_range():
+	var distance_to_enemy = translation.distance_to(self._enemy_position)
+	return distance_to_enemy < melee_range
 
 
 func _move_toward_position(_target_pos):
@@ -297,10 +316,9 @@ func _move_toward_position(_target_pos):
 
 func attack():
 	if not $AttackTimer.is_connected("timeout", self, "_melee_attack"):
-		$AttackTimer.wait_time = RATE_OF_FIRE_SECONDS_PER_SHOT
+		$AttackTimer.wait_time = rate_of_fire_seconds_per_shot
 		var _connect_result = $AttackTimer.connect("timeout", self, "_melee_attack")
 		$AttackTimer.start()
-	pass
 
 
 func player_is_visible():
