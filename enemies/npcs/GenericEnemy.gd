@@ -9,7 +9,7 @@ const HEIGHT_OF_PLAYER = Vector3(0, 1.5, 0) #TODO: is this correct?
 var starting_health_points = 3
 const SMELLING_DISTANCE = 20
 
-const MIN_ATTACK_RANGE = 1.1
+var min_attack_range = 1.1
 var melee_range = 1
 var has_moved_within_attack_range
 
@@ -268,7 +268,7 @@ func _run_state_dependent_processes():
 
 func is_within_min_attack_range():
 	var distance_to_enemy = translation.distance_to(self._enemy_position)
-	return distance_to_enemy < MIN_ATTACK_RANGE
+	return distance_to_enemy < min_attack_range
 
 
 func within_max_attack_range():
