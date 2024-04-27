@@ -6,6 +6,8 @@
 
 [node name="Centaur" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
+DAMAGE_AMOUNT = 2
+starting_health_points = 6
 
 [node name="Sprite3D" parent="Image" index="0"]
 texture = ExtResource( 2 )

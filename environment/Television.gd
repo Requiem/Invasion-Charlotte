@@ -31,8 +31,8 @@ func _jump_out_of_tv():
 	$Tween.stop_all()
 
 
-func recieve_damage():
-		health_points -= 4
+func recieve_damage(amt):
+		health_points -= amt
 		if (health_points <= 0):
 			die()
 

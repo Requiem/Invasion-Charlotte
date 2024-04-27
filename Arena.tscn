@@ -128,9 +128,8 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 3, 4.5 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 3, 5.5 )
 
 [node name="Hornet" parent="." instance=ExtResource( 8 )]
-DAMAGE_AMOUNT = 1
+starting_health_points = 3
 
 [node name="Centaur" parent="." instance=ExtResource( 9 )]
-DAMAGE_AMOUNT = null
 
 [connection signal="body_entered" from="HealthPack" to="HealthPack" method="_on_HealthPack_body_entered"]

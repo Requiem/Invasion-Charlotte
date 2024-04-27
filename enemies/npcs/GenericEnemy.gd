@@ -6,9 +6,9 @@ export var ACCELERATION_RATE = 0.1
 export var rate_of_fire_seconds_per_shot = 1
 export var DAMAGE_AMOUNT = 1
 export var POINT_VALUE = 10
+export var starting_health_points = 3
 
 const HEIGHT_OF_PLAYER = Vector3(0, 1.5, 0) #TODO: is this correct?
-var starting_health_points = 3
 const SMELLING_DISTANCE = 20
 
 var min_attack_range = 1.1
@@ -169,8 +169,8 @@ func _melee_attack():
 		queue_free()
 		return
 		
-	print("attack!")
-	player_node.receive_damage(DAMAGE_AMOUNT)
+	print("Attacking for: ", self.DAMAGE_AMOUNT)
+	player_node.receive_damage(self.DAMAGE_AMOUNT)
 
 
 func _run_state_enter_events():	
@@ -393,9 +393,9 @@ func _fade_away():
 	die()
 
 
-func recieve_damage():
+func recieve_damage(amt):
 	if _current_state != STATES.DECEASED:
-		num_health_points -= 3
+		num_health_points -= amt
 		$Image/Sprite3D.modulate = Color8(255, 0, 0)
 		$DamageTimer.start()
 		playtakedamagesound()
