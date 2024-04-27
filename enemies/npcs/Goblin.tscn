@@ -9,6 +9,7 @@
 
 [node name="Goblin" instance=ExtResource( 3 )]
 script = ExtResource( 1 )
+DAMAGE_AMOUNT = 1
 
 [node name="GoblinDamageSound1" type="AudioStreamPlayer" parent="." index="12"]
 stream = ExtResource( 4 )
