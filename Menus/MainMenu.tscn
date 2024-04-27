@@ -113,6 +113,12 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 script = SubResource( 5 )
 
+[node name="Panel" type="Panel" parent="."]
+margin_left = -245.0
+margin_top = -103.0
+margin_right = 1295.0
+margin_bottom = 808.0
+
 [node name="StoryText" type="RichTextLabel" parent="."]
 visible = false
 margin_left = 130.0
