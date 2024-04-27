@@ -8,6 +8,8 @@ onready var anim_player = $AnimationPlayer
 onready var raycast = $RayCast
 onready var particles = $CanvasLayer/Control/Particles2D
 
+onready var weapon_thumbs = {"firewand" : load("res://assets/weapons/firewandThumb.png") }
+
 export var  player_health = 5
 var equipped_weapon
 var weapons = []
@@ -127,15 +129,10 @@ func equip(slot):
 
 
 func pickup_weapon(slot, name):
-	var texture = ImageTexture.new()
-	var image = Image.new()
-	image.load("res://assets/weapons/" + name + "Thumb.png")
-	texture.create_from_image(image)
-	
 	if slot == 0:
-		$CanvasLayer/Thumb1.set_texture(texture)
+		$CanvasLayer/Thumb1.set_texture(weapon_thumbs[name])
 	elif slot == 1:
-		$CanvasLayer/Thumb2.set_texture(texture)
+		$CanvasLayer/Thumb2.set_texture(weapon_thumbs[name])
 
 
 func receive_damage(amt):
