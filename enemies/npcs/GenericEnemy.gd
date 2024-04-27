@@ -351,7 +351,8 @@ func turn_towards_target(_target_pos):
 
 func _notice_the_player_if_in_los():
 	if can_see == true:
-		if player_is_visible() and self._enemy_position != null:
+#		if player_is_visible() and self._enemy_position != null:
+		if self._enemy_position != null:
 			if ! self.is_alerted:
 				self.has_just_been_alerted = true
 
