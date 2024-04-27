@@ -170,5 +170,7 @@ func heal(amount):
 func die():
 	$HUDInstructionText.hide() #TODO: does this need to be here?
 	Global.player_node = null
-	var _result = get_tree().reload_current_scene()
+	
+	get_tree().change_scene("res://Menus/GameOver.tscn")
+	#var _result = get_tree().reload_current_scene()
 	queue_free()

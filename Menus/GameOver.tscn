@@ -1,0 +1,46 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Menus/main_title_font.tres" type="DynamicFont" id=1]
+[ext_resource path="res://Menus/GameOver.gd" type="Script" id=2]
+[ext_resource path="res://Menus/main_menu_Instruction_font.tres" type="DynamicFont" id=3]
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+
+[node name="GameOver" type="RichTextLabel" parent="."]
+margin_left = 182.0
+margin_top = 205.0
+margin_right = 889.0
+margin_bottom = 439.0
+custom_fonts/normal_font = ExtResource( 1 )
+bbcode_enabled = true
+bbcode_text = "[center]GAME OVER[/center]"
+text = "GAME OVER"
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="Instructions" type="RichTextLabel" parent="."]
+margin_left = 181.0
+margin_top = 295.0
+margin_right = 888.0
+margin_bottom = 529.0
+custom_fonts/normal_font = ExtResource( 3 )
+bbcode_enabled = true
+bbcode_text = "[center]
+Press SPACEBAR to try again
+Press ESC to return to Main Menu
+
+
+[/center]"
+text = "
+Press SPACEBAR to try again
+Press ESC to return to Main Menu
+
+
+"
+__meta__ = {
+"_editor_description_": ""
+}

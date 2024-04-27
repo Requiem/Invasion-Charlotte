@@ -166,6 +166,7 @@ func _melee_attack():
 		queue_free()
 		return
 		
+	print("attack!")
 	player_node.receive_damage()
 
 

@@ -22,7 +22,6 @@ const STORY_TEXT_LIST = ["In the heart of Gastonia, one of North Carolina's most
 func _ready():
 	_current_menu_item = MENU_ITEM_MAIN_TITLE
 
-
 func _physics_process(_delta):
 	# go forward on the menu screen
 	if Input.is_action_just_pressed("ui_accept"):
@@ -43,7 +42,7 @@ func _physics_process(_delta):
 			
 		elif _current_menu_item == MENU_ITEM_STORY_4:
 			var _result = get_tree().change_scene("res://Arena.tscn")
-
+			
 		_show_correct_menu_items()		
 	
 

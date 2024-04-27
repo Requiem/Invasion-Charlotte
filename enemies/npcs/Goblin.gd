@@ -5,6 +5,8 @@ var tv_spawn_node
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	var anim_player = $AnimationPlayer
+	anim_player.play("Goblin")
 	melee_range = 3
 	rate_of_fire_seconds_per_shot = 1
 
