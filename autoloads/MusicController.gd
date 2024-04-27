@@ -6,3 +6,7 @@ func _ready():
 	
 func play_music():
 	$Music.play()
+	
+
+func stop_music():
+	$Music.stop()
