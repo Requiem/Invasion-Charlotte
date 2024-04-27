@@ -8,7 +8,7 @@ onready var anim_player = $AnimationPlayer
 onready var raycast = $RayCast
 onready var particles = $CanvasLayer/Control/Particles2D
 
-onready var player_health = 5
+export var  player_health = 5
 var equipped_weapon
 var weapons = []
 
@@ -138,18 +138,18 @@ func pickup_weapon(slot, name):
 		$CanvasLayer/Thumb2.set_texture(texture)
 
 
-func receive_damage():
-	player_health -= 1
+func receive_damage(amt):
+	player_health -= amt
 
-	if player_health == 4:
+	if player_health < 5:
 		$CanvasLayer/Heart5.hide()
-	elif player_health == 3 :
+	if player_health < 4 :
 		$CanvasLayer/Heart4.hide()
-	elif player_health == 2:
+	if player_health < 3:
 		$CanvasLayer/Heart3.hide()
-	elif player_health == 1:
+	if player_health < 2:
 		$CanvasLayer/Heart2.hide()
-	elif player_health == 0:
+	if player_health < 1:
 		die()
 
 
