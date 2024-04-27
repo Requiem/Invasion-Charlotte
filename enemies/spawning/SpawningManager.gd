@@ -11,6 +11,8 @@ var SpawnTree = load("res://enemies/spawning/SpawnTree.tscn")
 onready var tree_spawn_point_list = get_tree().get_nodes_in_group("spawn_spawn_points") 
 var current_wave_num
 
+signal WAVE_COMPLETE
+
 func _ready():
 	_setup_arena()
 	current_wave_num = 0
@@ -42,15 +44,20 @@ func on_enemy_died():
 	print("debug, enemies_list_size: " + str(enemies_list.size()))
 	if (enemies_list.size() == 1):
 		print("debug, all enemies eliminated, starting next wave")
-		if (current_wave_num == TOTAL_NUMBER_OF_WAVES):
-			on_all_waves_finished()
-		else:
-			start_next_wave()
+		#if (current_wave_num == TOTAL_NUMBER_OF_WAVES):
+		#	on_all_waves_finished()
+		#else:
+		start_next_wave()
 		
 
 func start_next_wave():
 	current_wave_num += 1
-	var _enemy_spawn_point_list = get_tree().get_nodes_in_group("enemy_spawn_points_wave_" + str(current_wave_num)) 
+	var _enemy_spawn_point_list =  []#get_tree().get_nodes_in_group("enemy_spawn_points_wave_" + str(current_wave_num)) 
+	
+	for node in get_tree().get_nodes_in_group("enemy_spawn_points_wave_2"):
+		_enemy_spawn_point_list.append(node)
+	
+	print(_enemy_spawn_point_list)
 	enable_spawn_points(_enemy_spawn_point_list)
 	spawn_enemies(_enemy_spawn_point_list)
 	
@@ -76,7 +83,7 @@ func spawn_tree(_position):
 func spawn_enemies(_enemy_spawn_point_list):
 	for spawn_point in _enemy_spawn_point_list:
 		if spawn_point.spawning_is_enabled:
-			if (current_wave_num == 1):
+			if (current_wave_num == 1 or current_wave_num > 2):
 				print("debug, wave 1 enemy spawning at " + str(spawn_point.global_translation))
 				spawn_goblin(spawn_point.global_translation)
 			elif (current_wave_num == 2):
