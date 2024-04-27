@@ -2,6 +2,7 @@ extends Node
 
 
 var player_node
+var score = 0
 
 
 func restartLevel():

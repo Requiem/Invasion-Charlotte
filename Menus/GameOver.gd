@@ -13,6 +13,11 @@ var _current_menu_item
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	_current_menu_item = MENU_ITEM_GAME_OVER
+	
+	$ScoreText.bbcode_text = "[center]Score That Run: " 
+	$ScoreText.bbcode_text += str(Global.score)
+	$ScoreText.bbcode_text += "[/center]"
+	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(_delta):
@@ -20,6 +25,7 @@ func _physics_process(_delta):
 	
 	if Input.is_action_just_pressed("ui_accept"):
 		if _current_menu_item == MENU_ITEM_GAME_OVER:
+			Global.score = 0
 			var _result = get_tree().change_scene("res://Arena.tscn")
 			
 	elif Input.is_action_just_pressed("ui_cancel"):
@@ -34,4 +40,5 @@ func _physics_process(_delta):
 func _show_correct_menu_items():
 	if _current_menu_item == MENU_ITEM_GAME_OVER:
 		$GameOver.show()
+		$ScoreText.show()
 		

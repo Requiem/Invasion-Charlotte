@@ -5,6 +5,8 @@ var move_speed = 2
 export var ACCELERATION_RATE = 0.1
 export var rate_of_fire_seconds_per_shot = 1
 export var DAMAGE_AMOUNT = 1
+export var POINT_VALUE = 10
+
 const HEIGHT_OF_PLAYER = Vector3(0, 1.5, 0) #TODO: is this correct?
 var starting_health_points = 3
 const SMELLING_DISTANCE = 20
@@ -413,6 +415,8 @@ func die():
 
 	$ObliterationTimer.disconnect("timeout", self, "_fade_away")
 	emit_signal("enemy_died")
+	
+	Global.score += POINT_VALUE
 
 	respawn_or_disappear()
 	
