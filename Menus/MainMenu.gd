@@ -44,13 +44,12 @@ func _physics_process(_delta):
 			var _result = get_tree().change_scene("res://Arena.tscn")
 			
 		_show_correct_menu_items()		
-	
 
 	# go back on the menu screen
 	if Input.is_action_just_pressed("ui_cancel"):
 		if _current_menu_item == MENU_ITEM_MAIN_TITLE:
 			_current_menu_item = MENU_ITEM_CREDITS
-			
+		
 		elif _current_menu_item == MENU_ITEM_CREDITS:
 			_current_menu_item = MENU_ITEM_MAIN_TITLE
 			

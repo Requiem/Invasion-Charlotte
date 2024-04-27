@@ -26,6 +26,7 @@ func _physics_process(_delta):
 		if _current_menu_item == MENU_ITEM_GAME_OVER:
 			MusicController.stop_music()
 			var _result = get_tree().change_scene("res://Menus/MainMenu.tscn")
+			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		
 		_show_correct_menu_items()
 		
