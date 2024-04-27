@@ -6,25 +6,47 @@ const TOTAL_NUMBER_OF_WAVES = 2
 
 var Goblin = load("res://enemies/npcs/Goblin.tscn")
 var Hornet = load("res://enemies/npcs/Hornet.tscn")
+var Centaur = load("res://enemies/npcs/Centaur.tscn")
+var HealthPack = load("res://pickups/HealthPack.tscn")
 var SpawnTree = load("res://enemies/spawning/SpawnTree.tscn")
 
+var new_spawn_point_random_chance = 0
+var centaur_random_chance = 0
+var hornet_random_chance = 0
+var health_pack_random_chance = 0
+
+const STARTING_SPAWN_POINTS = 4
+
+const RANDOM_SPAWN_INC = 250
+const CENTAUR_SPAWN_INC = 15
+const HORNET_SPAWN_INC = 5
+const HEALTH_PACK_INC = 200
+
 onready var tree_spawn_point_list = get_tree().get_nodes_in_group("spawn_spawn_points") 
+onready var all_spawn_point_list = get_tree().get_nodes_in_group("enemy_spawn_points")
+onready var random_spawn_point_list = []
+onready var health_pack_spawn_point_list = get_tree().get_nodes_in_group("health_pack_spawns")
+
 var current_wave_num
 
 signal WAVE_COMPLETE
 
 func _ready():
-	_setup_arena()
 	current_wave_num = 0
+	_setup_arena()
+	
+	for _i in range(0, STARTING_SPAWN_POINTS):
+		random_spawn_point_list.append(all_spawn_point_list.pop_front())
 	
 
 # setup arena with spawn points and enemies
 func _setup_arena():
 	print("debug about to enable spawn points")
-	var enemy_spawn_point_list = get_tree().get_nodes_in_group("enemy_spawn_points") 
+	#var enemy_spawn_point_list = get_tree().get_nodes_in_group("enemy_spawn_points") 
 	enable_tree_spawn_points()
 	spawn_spawn_points()
-	spawn_enemies(enemy_spawn_point_list)
+	start_next_wave()
+	#spawn_enemies(enemy_spawn_point_list)
 	
 	
 func _physics_process(_delta):
@@ -52,12 +74,36 @@ func on_enemy_died():
 
 func start_next_wave():
 	current_wave_num += 1
+	health_pack_random_chance += HEALTH_PACK_INC
+	
 	var _enemy_spawn_point_list =  []#get_tree().get_nodes_in_group("enemy_spawn_points_wave_" + str(current_wave_num)) 
 	
-	for node in get_tree().get_nodes_in_group("enemy_spawn_points_wave_2"):
-		_enemy_spawn_point_list.append(node)
+	if rand_range(new_spawn_point_random_chance, 1000) > 800:
+		new_spawn_point_random_chance = 0
+		random_spawn_point_list.append(all_spawn_point_list.pop_front())
 	
-	print(_enemy_spawn_point_list)
+	for node in random_spawn_point_list:
+		if  rand_range(hornet_random_chance * current_wave_num, 1000) > 900:
+			_enemy_spawn_point_list.append(["hornet", node])
+			hornet_random_chance = 0
+			centaur_random_chance += CENTAUR_SPAWN_INC
+			
+		elif rand_range(centaur_random_chance * current_wave_num, 1000) > 750:
+			_enemy_spawn_point_list.append(["centaur", node])
+			centaur_random_chance = 0
+			hornet_random_chance += HORNET_SPAWN_INC
+			
+		else:
+			_enemy_spawn_point_list.append(["goblin", node])
+			centaur_random_chance += CENTAUR_SPAWN_INC
+			hornet_random_chance += HORNET_SPAWN_INC
+			
+	if rand_range(health_pack_random_chance, 1000) > 750:
+		health_pack_random_chance = 0;
+		spawn_health_pack(health_pack_spawn_point_list[int(rand_range(0, len(health_pack_spawn_point_list) - 1))])
+		
+		
+	
 	enable_spawn_points(_enemy_spawn_point_list)
 	spawn_enemies(_enemy_spawn_point_list)
 	
@@ -82,14 +128,26 @@ func spawn_tree(_position):
 	
 func spawn_enemies(_enemy_spawn_point_list):
 	for spawn_point in _enemy_spawn_point_list:
-		if spawn_point.spawning_is_enabled:
-			if (current_wave_num == 1 or current_wave_num > 2):
-				print("debug, wave 1 enemy spawning at " + str(spawn_point.global_translation))
-				spawn_goblin(spawn_point.global_translation)
-			elif (current_wave_num == 2):
-				print("debug, wave 2 enemy spawning at " + str(spawn_point.global_translation))
-				spawn_hornet(spawn_point.global_translation)
+		print("Spawn Point: ",spawn_point)
+		if spawn_point[1].spawning_is_enabled:
+			if (spawn_point[0] == "goblin"):
+				print("debug, goblin spawning at " + str(spawn_point[1].global_translation))
+				spawn_goblin(spawn_point[1].global_translation)
+			elif (spawn_point[0] == "centaur"):
+				print("debug, centaur spawning at " + str(spawn_point[1].global_translation))
+				spawn_centaur(spawn_point[1].global_translation)
+			elif (spawn_point[0] == "hornet"):
+				print("debug, hornet spawning at " + str(spawn_point[1].global_translation))
+				spawn_hornet(spawn_point[1].global_translation)
 
+func spawn_centaur(_position):
+	var centaurInstance = Centaur.instance()
+	centaurInstance.starting_pos = _position
+	centaurInstance.translation = _position
+	call_deferred("add_child", centaurInstance)
+	centaurInstance.should_respawn = true #TODO: should not respawn, right
+	centaurInstance.add_to_group("enemies")
+	centaurInstance.connect("enemy_died", self, "on_enemy_died")
 
 func spawn_hornet(_position):
 	var hornetInstance = Hornet.instance()
@@ -110,6 +168,17 @@ func spawn_goblin(_position):
 	goblinInstance.add_to_group("enemies")
 	goblinInstance.connect("enemy_died", self, "on_enemy_died")
 
+func spawn_health_pack(_position):
+	print("Spawning medpack")
+	var t = _position.transform
+	var healthInstance = HealthPack.instance()
+	#healthInstance.starting_pos = _position
+	#healthInstance.translation = 
+	healthInstance.set_position(t)
+	call_deferred("add_child", healthInstance)
+	#healthInstance.should_respawn = true
+	#healthInstance.add_to_group("enemies")
+	#healthInstance.connect("enemy_died", self, "on_enemy_died")
 
 func enable_tree_spawn_points():
 	var indexes_to_spawn_trees = pickRandomIndexes(tree_spawn_point_list, NUMBER_OF_SPAWN_POINTS_TO_ENABLE)
@@ -138,7 +207,7 @@ func pickRandomIndexes(list: Array, N: int) -> Array:
 
 func enable_spawn_points(_enemy_spawn_point_list):
 	for spawn_point in _enemy_spawn_point_list:
-		spawn_point.spawning_is_enabled = true
+		spawn_point[1].spawning_is_enabled = true
 
 
 func _on_first_tv_destroyed():

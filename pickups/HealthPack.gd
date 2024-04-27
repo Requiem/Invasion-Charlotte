@@ -19,5 +19,10 @@ func _process(_delta):
 
 func _on_HealthPack_body_entered(body):
 		if body.is_in_group("player"):
+			print("Debug: Pickup Health")
 			player_node.heal(amount)
 			queue_free()
+
+func set_position(trans):
+	self.transform = trans
+	$CollisionShape.transform = trans

@@ -110,15 +110,15 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.98654, -0.0556774, -15.7256 
 
 [node name="HornetSpawnPoints" type="Node" parent="."]
 
-[node name="HornetSpawnPoint1" parent="HornetSpawnPoints" groups=["enemy_spawn_points_wave_2"] instance=ExtResource( 10 )]
+[node name="HornetSpawnPoint1" parent="HornetSpawnPoints" groups=["enemy_spawn_points_wave_2", "random_spawn_points"] instance=ExtResource( 10 )]
 
-[node name="HornetSpawnPoint2" parent="HornetSpawnPoints" groups=["enemy_spawn_points_wave_2"] instance=ExtResource( 10 )]
+[node name="HornetSpawnPoint2" parent="HornetSpawnPoints" groups=["enemy_spawn_points_wave_2", "random_spawn_points"] instance=ExtResource( 10 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17, 3, -4.5 )
 
-[node name="HornetSpawnPoint3" parent="HornetSpawnPoints" groups=["enemy_spawn_points_wave_2"] instance=ExtResource( 10 )]
+[node name="HornetSpawnPoint3" parent="HornetSpawnPoints" groups=["enemy_spawn_points_wave_2", "random_spawn_points"] instance=ExtResource( 10 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 3, -4.5 )
 
-[node name="HornetSpawnPoint4" parent="HornetSpawnPoints" groups=["enemy_spawn_points_wave_2"] instance=ExtResource( 10 )]
+[node name="HornetSpawnPoint4" parent="HornetSpawnPoints" groups=["enemy_spawn_points_wave_2", "random_spawn_points"] instance=ExtResource( 10 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 3, 14.5 )
 
 [node name="HornetSpawnPoint5" parent="HornetSpawnPoints" groups=["enemy_spawn_points_wave_2"] instance=ExtResource( 10 )]
@@ -128,8 +128,21 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 3, 4.5 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 3, 5.5 )
 
 [node name="Hornet" parent="." instance=ExtResource( 8 )]
-starting_health_points = 3
 
 [node name="Centaur" parent="." instance=ExtResource( 9 )]
+
+[node name="HealthPackSpawnPoints" type="Node" parent="."]
+
+[node name="HealthPackSpawn1" type="Position3D" parent="HealthPackSpawnPoints" groups=["health_pack_spawns"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.91299, 0.305342, -7.01719 )
+
+[node name="HealthPackSpawn2" type="Position3D" parent="HealthPackSpawnPoints" groups=["health_pack_spawns"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.7455, 0.623533, -7.01719 )
+
+[node name="HealthPackSpawn3" type="Position3D" parent="HealthPackSpawnPoints" groups=["health_pack_spawns"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.7455, 0.458828, 11.2502 )
+
+[node name="HealthPackSpawn4" type="Position3D" parent="HealthPackSpawnPoints" groups=["health_pack_spawns"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.40229, 0.495075, 11.2502 )
 
 [connection signal="body_entered" from="HealthPack" to="HealthPack" method="_on_HealthPack_body_entered"]
