@@ -98,9 +98,9 @@ func start_next_wave():
 			centaur_random_chance += CENTAUR_SPAWN_INC
 			hornet_random_chance += HORNET_SPAWN_INC
 			
-	if rand_range(health_pack_random_chance, 1000) > 750:
-		health_pack_random_chance = 0;
-		spawn_health_pack(health_pack_spawn_point_list[int(rand_range(0, len(health_pack_spawn_point_list) - 1))])
+#	if rand_range(health_pack_random_chance, 1000) > 750:
+#		health_pack_random_chance = 0;
+#		spawn_health_pack(health_pack_spawn_point_list[int(rand_range(0, len(health_pack_spawn_point_list) - 1))])
 		
 		
 	
