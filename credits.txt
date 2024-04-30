@@ -1,0 +1,16 @@
+David - Lead Programmer
+
+Zach - Lead Artist
+
+Reed - Sound Designer and Storyteller
+
+
+
+Much of the game art was taken from the "Dungeon Crawl" tileset. From the website https://opengameart.org/content/dungeon-crawl-32x32-tiles:
+
+"
+Copyright/Attribution Notice: 
+You can use these tilesets in your program freely. No attribution is required. As a courtesy, include a link to the OGA page: http://opengameart.org/content/dungeon-crawl-32x32-tiles, the crawl-tiles page: http://code.google.com/p/crawl-tiles/ or see the License Notice instructions on http://rltiles.sourceforge.net/
+"
+
+Music and sound effects are from https://www.zapsplat.com/
