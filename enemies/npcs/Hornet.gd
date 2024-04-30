@@ -3,7 +3,6 @@ extends "res://enemies/npcs/GenericEnemy.gd"
 
 func _ready():
 	is_flyer = true
-	move_speed = 3.5
 	rate_of_fire_seconds_per_shot = 1
 	min_attack_range = 1.5
 

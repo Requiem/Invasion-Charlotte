@@ -13,6 +13,10 @@ func _ready():
 
 func die():
 	.die()
+	$GoblinDamageSound1.stop()
+	$GoblinDamageSound2.stop()
+	$GoblinDamageSound3.stop()
+	$GoblinDamageSound4.stop()
 	
 	if (tv_spawn_node != null and ! is_instance_valid(tv_spawn_node)):
 		queue_free()

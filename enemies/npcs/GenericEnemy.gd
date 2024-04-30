@@ -1,7 +1,7 @@
 
 extends KinematicBody
 
-var move_speed = 2
+export var move_speed = 2.0
 export var ACCELERATION_RATE = 0.1
 export var rate_of_fire_seconds_per_shot = 1
 export var DAMAGE_AMOUNT = 1

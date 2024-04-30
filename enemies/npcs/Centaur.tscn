@@ -6,6 +6,7 @@
 
 [node name="Centaur" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
+move_speed = 2.75
 DAMAGE_AMOUNT = 2
 starting_health_points = 6
 
