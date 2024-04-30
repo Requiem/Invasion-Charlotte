@@ -78,9 +78,10 @@ func start_next_wave():
 	
 	var _enemy_spawn_point_list =  []#get_tree().get_nodes_in_group("enemy_spawn_points_wave_" + str(current_wave_num)) 
 	
-	if rand_range(new_spawn_point_random_chance, 1000) > 800:
-		new_spawn_point_random_chance = 0
-		random_spawn_point_list.append(all_spawn_point_list.pop_front())
+	if current_wave_num > 1 and len(all_spawn_point_list) > 0:
+		if rand_range(new_spawn_point_random_chance, 1000) > 600:
+			new_spawn_point_random_chance = 0
+			random_spawn_point_list.append(all_spawn_point_list.pop_front())
 	
 	for node in random_spawn_point_list:
 		if  rand_range(hornet_random_chance * current_wave_num, 1000) > 900:
